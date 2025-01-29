@@ -21,6 +21,7 @@ func place_bomb() -> void:
         bomb.explosion_size = player.explosion_size
         bomb.auto_detonate = player.auto_detonate
         bomb.explosions_container = explosions_container
+        player.collision_mask = player.collision_mask ^ (1 << 4) # 1 << 4 is the bomb layer
         bombs_container.add_child(bomb)
 
 func detonate_bombs() -> void:
