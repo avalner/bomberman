@@ -17,6 +17,11 @@
 		"file": "res://sounds/level_finished.mp3",
 		"group": "game"
 	},
+	"lost_life": {
+		"file": "res://sounds/lost_life.wav",
+		"volume_db": -6,
+		"group": "game"
+	},
     "footsteps": {
 		"file": "res://sounds/footsteps.mp3",
 		"loop": true,
@@ -39,10 +44,6 @@
 	},
 	"explosion": {
 		"file": "res://sounds/explosion.wav",
-		"volume_db": -6
-	},
-	"lost_life": {
-		"file": "res://sounds/lost_life.wav",
 		"volume_db": -6
 	},
 	"powerup": {
