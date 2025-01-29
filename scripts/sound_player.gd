@@ -1,13 +1,13 @@
 extends Node
 
-var jsonSounds = load_json("res://config/sounds.json"); 
-var sounds = map_dictionary(jsonSounds)
+var jsonSounds: Dictionary = load_json("res://config/sounds.json"); 
+var sounds: Dictionary = map_dictionary(jsonSounds)
 var players: Dictionary = {}
 
 func map_dictionary(original: Dictionary) -> Dictionary:
 	print("Mapping dictionary")
-	var result = {}
-	for key in original.keys():
+	var result: Dictionary = {}
+	for key: String in original.keys():
 		result[key] = {
 			"audio_stream": load(original[key]["file"]),
 		}
@@ -35,17 +35,18 @@ func map_dictionary(original: Dictionary) -> Dictionary:
 	
 func load_json(file_path: String) -> Dictionary:
 	# Open the file
-	var file = FileAccess.open(file_path, FileAccess.READ)
+	var file: FileAccess = FileAccess.open(file_path, FileAccess.READ)
 	if file == null:
 		print("Error: Unable to open JSON file.")
 		return {}
 	# Read the file's content
-	var content = file.get_as_text()
+	var content: String = file.get_as_text()
 	file.close()
 	
 	# Parse the JSON content
-	var json_parser = JSON.new()
-	var result = json_parser.parse(content)
+	var json_parser: JSON = JSON.new()
+	var result: int = json_parser.parse(content)
+	
 	if result != OK:
 		print("Error parsing JSON:", json_parser.get_error_message())
 		return {}
@@ -56,11 +57,11 @@ func load_json(file_path: String) -> Dictionary:
 func is_playing(sound_name: String) -> bool:
 	return players.has(sound_name)
 
-func play_sound(sound_name: String):
+func play_sound(sound_name: String) -> void:
 	if sounds.has(sound_name):
-		var player = AudioStreamPlayer.new()
+		var player: AudioStreamPlayer = AudioStreamPlayer.new()
 		var timer: Timer
-		var config = sounds[sound_name]
+		var config: Dictionary = sounds[sound_name]
 
 		player.stream = config.audio_stream
 
@@ -81,7 +82,7 @@ func play_sound(sound_name: String):
 		
 		if config.has("delay"):
 			timer = Timer.new()
-			timer.timeout.connect(func(): player.play())
+			timer.timeout.connect(func() -> void: player.play())
 			timer.wait_time = config.delay
 			add_child(timer)
 			timer.start()
@@ -101,13 +102,13 @@ func play_sound(sound_name: String):
 
 		# Automatically queue the player for deletion when the sound ends
 		if !timer:
-			player.finished.connect(func(): if player: player.queue_free()) # Connect the finished signal
+			player.finished.connect(func() -> void: if player: player.queue_free()) # Connect the finished signal
 	else:
 		print("Sound not found:", sound_name)
 
 func stop_sound(sound_name: String) -> void:
 	if players.has(sound_name):
-		for playerItem in players[sound_name]:
+		for playerItem: Dictionary in players[sound_name]:
 			if playerItem.has("timer"):
 				playerItem["timer"].stop()
 				playerItem["timer"].queue_free()
@@ -117,10 +118,10 @@ func stop_sound(sound_name: String) -> void:
 		players.erase(sound_name)
 
 func stop_sound_group(group_name: String) -> void:
-	for sound_name in players.keys():
+	for sound_name: String in players.keys():
 		if sounds[sound_name].has("group") and sounds[sound_name].group == group_name:
 			stop_sound(sound_name)
 
 func stop_all_sounds() -> void:
-	for sound_name in players.keys():
+	for sound_name: String in players.keys():
 		stop_sound(sound_name)

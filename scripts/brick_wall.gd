@@ -4,7 +4,7 @@ class_name BrickWall
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
-func destroy():
+func destroy() -> void:
 	animated_sprite_2d.play("destroy")
 	
 

@@ -1,6 +1,6 @@
 extends Node
 
-class_name BambPlacementSystem
+class_name BombPlacementSystem
 
 const BOMB_SCENE = preload("res://scenes/bomb.tscn")
 
@@ -15,7 +15,7 @@ func _ready() -> void:
 
 func place_bomb() -> void:
     if bombs_container.get_child_count() < player.max_bomb_count:
-        var bomb = BOMB_SCENE.instantiate()
+        var bomb: Bomb = BOMB_SCENE.instantiate()
         bomb.position = (player.position / Globals.TILE_SIZE).floor() * Globals.TILE_SIZE \
              + Vector2(Globals.TILE_SIZE / 2.0, Globals.TILE_SIZE / 2.0)
         bomb.explosion_size = player.explosion_size

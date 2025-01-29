@@ -30,11 +30,11 @@ func _ready() -> void:
         var flame_size: int = explosion_size
 
         if raycast.is_colliding():
-            var collider = raycast.get_collider()
-            var collision_point = raycast.get_collision_point()
-            var tile_coords = Vector2(floor(collision_point.x / Globals.TILE_SIZE), floor(collision_point.y / Globals.TILE_SIZE))
-            var collider_global_position = tile_coords * Globals.TILE_SIZE
-            var collider_distance_vec = abs(raycast.global_position - collider_global_position) / Globals.TILE_SIZE
+            var collider: Object = raycast.get_collider()
+            var collision_point: Vector2 = raycast.get_collision_point()
+            var tile_coords: Vector2 = Vector2(floor(collision_point.x / Globals.TILE_SIZE), floor(collision_point.y / Globals.TILE_SIZE))
+            var collider_global_position: Vector2 = tile_coords * Globals.TILE_SIZE
+            var collider_distance_vec: Vector2 = abs(raycast.global_position - collider_global_position) / Globals.TILE_SIZE
             var collider_distance: int = floor(max(collider_distance_vec.x, collider_distance_vec.y))
             
             flame_size = min(flame_size, collider_distance)
@@ -54,11 +54,11 @@ func _on_animated_sprite_2d_frame_changed() -> void:
 
 
 func update_explosion_for_frame() -> void:
-    var frame = explosion_center_sprite.frame
+    var frame: int = explosion_center_sprite.frame
 
     for i in range(0, FLAME_DIRECTION_COUNT):
         if frame <= MIDDLE_ANIMATION_FRAME and flame_sizes[i] > flame_current_sizes[i]:
-            var flame_segment = DIRECTIONAL_EXPLOSION_SCENE.instantiate()
+            var flame_segment: DirectionalExplosion = DIRECTIONAL_EXPLOSION_SCENE.instantiate()
             flame_segment.global_position = global_position + DIRECTION_VECTORS[i] * Globals.TILE_SIZE * frame
             get_parent().add_child(flame_segment)
             
@@ -70,7 +70,7 @@ func update_explosion_for_frame() -> void:
             flame_current_sizes[i] += 1
         elif flame_sizes[i] > flame_current_sizes[i]:
             for j in range(0, flame_sizes[i] - flame_current_sizes[i]):
-                var flame_segment = DIRECTIONAL_EXPLOSION_SCENE.instantiate()
+                var flame_segment: DirectionalExplosion = DIRECTIONAL_EXPLOSION_SCENE.instantiate()
                 flame_segment.global_position = global_position + DIRECTION_VECTORS[i] * Globals.TILE_SIZE * (frame + j)
                 get_parent().add_child(flame_segment)
                 

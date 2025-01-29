@@ -12,7 +12,7 @@ func _process(_delta: float) -> void:
 
 func _draw() -> void:
 	for pos in debug_positions:
-		var local_position = pos - global_position;
+		var local_position: Vector2 = pos - global_position;
 		draw_circle(local_position, 2, Color("red"))
 	
 func set_debug_position(pos: Vector2) -> void:

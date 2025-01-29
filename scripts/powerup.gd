@@ -26,8 +26,8 @@ enum PowerupType {
 
 @export var powerup_type: PowerupType = PowerupType.BOMB_COUNT
 
-var fade_speed = 1.5 # Speed of the fade effect
-var increasing = true # Tracks whether the alpha is increasing or decreasing
+var fade_speed: float = 1.5 # Speed of the fade effect
+var increasing: bool = true # Tracks whether the alpha is increasing or decreasing
 
 func _ready() -> void:
     for sprite in sprites:
@@ -35,7 +35,7 @@ func _ready() -> void:
     
     sprites[powerup_type].show()
 
-func _process(delta: float):
+func _process(delta: float) -> void:
     animate(delta)
 
 func animate(delta: float) -> void:

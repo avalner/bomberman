@@ -3,14 +3,14 @@ extends CharacterBody2D
 class_name BalloonEnemy
 
 const TILE_SIZE = Globals.TILE_SIZE
-const HALF_TILE_SIZE = 8
-const SPEED = 30
+const HALF_TILE_SIZE: int = 8
+const SPEED: int = 30
 const MAP_OFFSET = Vector2(TILE_SIZE, TILE_SIZE) * 1.5
 const TILE_CENTER_OFFSET = Vector2i(HALF_TILE_SIZE, HALF_TILE_SIZE)
+const DIRECTION_COUNT: int = 4
 const DIRECTION_VECTORS: Array[Vector2] = [Vector2.UP, Vector2.RIGHT, Vector2.DOWN, Vector2.LEFT]
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
-@onready var player: Player = get_node("/root/main/Player")
 @onready var raycasts: Array[RayCast2D] = [
     $Raycasts/Top,
     $Raycasts/Right,
@@ -33,22 +33,24 @@ func _update_raycasts() -> void:
     raycasts_ready = true
 
 func _process(_delta: float) -> void:
-    if direction == Vector2.LEFT:
-        animated_sprite.flip_h = true
-    elif direction == Vector2.RIGHT:
-        animated_sprite.flip_h = false
+    match direction:
+        Vector2.LEFT:
+            animated_sprite.flip_h = true
+        Vector2.RIGHT:
+            animated_sprite.flip_h = false
 
-func _physics_process(_delta):
+func _physics_process(_delta: float) -> void:
     if !raycasts_ready:
         return
     
     if is_dead:
         velocity = Vector2.ZERO
+        return
     
-    if isTileCenter():
+    if is_tile_center():
         var available_directions: Array[Vector2] = []
         
-        for i in 4:
+        for i in range(DIRECTION_COUNT):
             if !raycasts[i].is_colliding():
                 available_directions.append(DIRECTION_VECTORS[i])
         
@@ -64,7 +66,7 @@ func _physics_process(_delta):
     
     move_and_slide()
 
-func isTileCenter() -> bool:
+func is_tile_center() -> bool:
     return Vector2i(ceil(position)) % TILE_SIZE == TILE_CENTER_OFFSET
 
 func destroy() -> void:

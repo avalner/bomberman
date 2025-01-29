@@ -4,7 +4,7 @@ class_name Player
 
 @export var bombs_container: Node = null
 @export var explosions_container: Node = null
-@onready var bomb_placement_system: BambPlacementSystem = $BambPlacementSystem
+@onready var bomb_placement_system: BombPlacementSystem = $BombPlacementSystem
 @onready var player_animations: AnimatedSprite2D = $PlayerAnimations
 
 static var speed: float = 50
@@ -35,7 +35,7 @@ func _ready() -> void:
 
 func changeState(new_state: PlayerState) -> void:
 	if state != new_state:
-		var old_state = state
+		var old_state: PlayerState = state
 		state = new_state
 		state_changed.emit(state, old_state)
 
@@ -90,7 +90,7 @@ func apply_powerup(powerup: Powerup.PowerupType) -> void:
 	powerup_taken.emit(powerup)
 		
 
-func remove():
+func remove() -> void:
 	changeState(PlayerState.REMOVED)
 	queue_free()
 	

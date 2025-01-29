@@ -6,13 +6,13 @@ class_name LevelExitDoor
 var is_player_inside := false
 var player: Player
 
-func check_if_centered(body):
+func check_if_centered(body: Node2D) -> void:
     # Get the global positions of the Area2D and the player
-    var area_position = global_position
-    var player_position = body.global_position
+    var area_position: Vector2 = global_position
+    var player_position: Vector2 = body.global_position
 
     # Calculate the distance between the centers
-    var distance = player_position.distance_to(area_position)
+    var distance: float = player_position.distance_to(area_position)
 
     # Check if the centers are approximately aligned
     if distance < 1.0: # Tweak this value to adjust the alignment threshold

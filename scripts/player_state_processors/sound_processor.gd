@@ -24,5 +24,5 @@ func _on_state_changed(state: Player.PlayerState, _old_state: Player.PlayerState
 	elif state == Player.PlayerState.REMOVED:
 		SoundsPlayer.stop_sound_group("player")
 
-func _on_powerup_taken(_powerup_type: Powerup.PowerupType):
+func _on_powerup_taken(_powerup_type: Powerup.PowerupType) -> void:
 	SoundsPlayer.play_sound("powerup")
