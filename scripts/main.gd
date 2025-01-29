@@ -3,72 +3,104 @@ extends Node
 const BRICK_WALL = preload("res://scenes/brick_wall.tscn")
 const LEVEL_EXIT_DOOR = preload("res://scenes/level_exit_door.tscn")
 const POWERUP = preload("res://scenes/powerup.tscn")
+const BALLOON_ENEMY = preload("res://scenes/enemies/balloon_enemy.tscn")
+
 const TILE_SIZE = Globals.TILE_SIZE
 const LEVEL_WIDTH = 29
 const LEVEL_HEIGHT = 11
-const CONCRETE_TILE_COUNT = 70
 const PLAYER_AREA_SIZE = 3
-const BRICK_WALL_FILL_RATE = 0.2
+const BRICK_WALL_FILL_RATE = 0.5
 const LEVEL_OFFSET = Vector2(TILE_SIZE, TILE_SIZE) * 1.5
 
 @onready var brick_walls_container: Node = $BrickWalls
+@onready var enemies_container: Node = $Enemies
 @onready var tile_map_layer: TileMapLayer = $TileMapLayer
 
 func _ready() -> void:
-	Globals.change_game_state(Globals.GameState.LEVEL_START)
-	procedurely_generate_level()
+    Globals.change_game_state(Globals.GameState.LEVEL_START)
+    procedurely_generate_level()
 
 func procedurely_generate_level() -> void:
-	var brick_wall_count = 0
-	var available_tiles = LEVEL_WIDTH * LEVEL_HEIGHT - CONCRETE_TILE_COUNT - PLAYER_AREA_SIZE ** 2
-	var max_brick_walls = int(available_tiles * BRICK_WALL_FILL_RATE)
-	var powerup_x = randi() % LEVEL_WIDTH
-	var powerup_y = randi() % LEVEL_HEIGHT
-	var exit_door_x = randi() % LEVEL_WIDTH
-	var exit_door_y = randi() % LEVEL_HEIGHT
+    var occupied_tiles: Array[Vector2] = []
+    occupied_tiles.append_array(get_player_start_area_tiles())
+    occupied_tiles.append_array(get_concrete_tiles())
+    var powerup_position = get_random_tile_position(occupied_tiles)
+    var exit_door_position = get_random_tile_position(occupied_tiles)
 
-	# Randomly determine coordinates for the powerup
-	while (powerup_x < PLAYER_AREA_SIZE and powerup_y < PLAYER_AREA_SIZE) or (powerup_y % 2 != 0 and powerup_x % 2 != 0):
-		powerup_x = randi() % LEVEL_WIDTH
-		powerup_y = randi() % LEVEL_HEIGHT
+    place_power_up(powerup_position, Powerup.PowerupType.BOMB_COUNT)
 
-	# Randomly determine coordinates for the level exit door
-	while (exit_door_x < PLAYER_AREA_SIZE and exit_door_y < PLAYER_AREA_SIZE) or (exit_door_y % 2 != 0 and exit_door_x % 2 != 0):
-		if (exit_door_x == powerup_x and exit_door_y == powerup_y): continue
-		exit_door_x = randi() % LEVEL_WIDTH
-		exit_door_y = randi() % LEVEL_HEIGHT
+    place_level_exit_door(exit_door_position)
+    place_brick_wall(exit_door_position) # Place a BRICK_WALL over the POWERUP
+    
+    var max_brick_walls = int(occupied_tiles.size() * BRICK_WALL_FILL_RATE)
+    place_brick_walls(max_brick_walls, occupied_tiles)
+    place_balloons(5, occupied_tiles)
 
-	var powerup = POWERUP.instantiate()
-	powerup.position = Vector2(powerup_x * TILE_SIZE, powerup_y * TILE_SIZE) + LEVEL_OFFSET
-	powerup.powerup_type = Powerup.PowerupType.BOMB_COUNT
-	brick_walls_container.add_child(powerup)
+func get_random_tile_position(occupied_tiles: Array[Vector2]) -> Vector2:
+    var x = randi() % LEVEL_WIDTH
+    var y = randi() % LEVEL_HEIGHT
+    
+    while occupied_tiles.has(Vector2(x, y)):
+        x = randi() % LEVEL_WIDTH
+        y = randi() % LEVEL_HEIGHT
 
-	# Place a BRICK_WALL over the POWERUP
-	var brick_wall = BRICK_WALL.instantiate()
-	brick_wall.position = Vector2(powerup_x * TILE_SIZE, powerup_y * TILE_SIZE) + LEVEL_OFFSET
-	brick_walls_container.add_child(brick_wall)
-	brick_wall_count += 1
+    occupied_tiles.append(Vector2(x, y))
+    
+    return Vector2(x, y)
 
-	var door = LEVEL_EXIT_DOOR.instantiate()
-	door.name = "LevelExitDoor"
-	door.position = Vector2(exit_door_x * TILE_SIZE, exit_door_y * TILE_SIZE) + LEVEL_OFFSET
-	brick_walls_container.add_child(door)
+func get_concrete_tiles() -> Array[Vector2]:
+    var concrete_tile_positions: Array[Vector2] = []
+    
+    for x in range(LEVEL_WIDTH):
+        for y in range(LEVEL_HEIGHT):
+            if y % 2 != 0 or x % 2 != 0:
+                concrete_tile_positions.append(Vector2(x, y))
+    return concrete_tile_positions
 
-	# Place a BRICK_WALL over the POWERUP
-	brick_wall = BRICK_WALL.instantiate()
-	brick_wall.position = Vector2(exit_door_x * TILE_SIZE, exit_door_y * TILE_SIZE) + LEVEL_OFFSET
-	brick_walls_container.add_child(brick_wall)
-	brick_wall_count += 1
+func get_player_start_area_tiles() -> Array[Vector2]:
+    var player_start_area_tiles: Array[Vector2] = []
+    for y in range(PLAYER_AREA_SIZE):
+        for x in range(PLAYER_AREA_SIZE):
+            player_start_area_tiles.append(Vector2(x, y))
+    return player_start_area_tiles
 
-	for y in range(LEVEL_HEIGHT):
-		for x in range(LEVEL_WIDTH):
-			# Skip the top-left 3x3 area for the player
-			if (x < PLAYER_AREA_SIZE and y < PLAYER_AREA_SIZE) or (y % 2 != 0 and x % 2 != 0) or (x == powerup_x and y == powerup_y) or (x == exit_door_x and y == exit_door_y):
-				continue
-			else:
-				# Place a BRICK_WALL if limit not reached
-				if randi() % 100 < int(BRICK_WALL_FILL_RATE * 100) and brick_wall_count < max_brick_walls:
-					brick_wall = BRICK_WALL.instantiate()
-					brick_wall.position = Vector2(x * TILE_SIZE, y * TILE_SIZE) + LEVEL_OFFSET
-					brick_walls_container.add_child(brick_wall)
-					brick_wall_count += 1
+func place_level_exit_door(exit_door_position: Vector2) -> void:
+    var door = LEVEL_EXIT_DOOR.instantiate()
+    door.name = "LevelExitDoor"
+    door.position = exit_door_position * TILE_SIZE + LEVEL_OFFSET
+    brick_walls_container.add_child(door)
+    place_brick_wall(exit_door_position) # Place a BRICK_WALL over the LEVEL_EXIT_DOOR
+
+func place_power_up(power_up_position: Vector2, type: Powerup.PowerupType) -> void:
+    var powerup = POWERUP.instantiate()
+    powerup.position = power_up_position * TILE_SIZE + LEVEL_OFFSET
+    powerup.powerup_type = type
+    brick_walls_container.add_child(powerup)
+    place_brick_wall(power_up_position) # Place a BRICK_WALL over the POWERUP
+
+func place_brick_wall(brick_position: Vector2) -> void:
+    var brick_wall = BRICK_WALL.instantiate()
+    brick_wall.position = brick_position * TILE_SIZE + LEVEL_OFFSET
+    brick_walls_container.add_child(brick_wall)
+
+func place_balloons(count: int, occupied_tiles: Array[Vector2]) -> void:
+    for i in count:
+        var balloon = BALLOON_ENEMY.instantiate()
+        var balloon_position = get_random_tile_position(occupied_tiles)
+        balloon.position = balloon_position * TILE_SIZE + LEVEL_OFFSET
+        enemies_container.add_child(balloon)
+
+func place_brick_walls(max_brick_walls: int, occupied_tiles: Array[Vector2]) -> void:
+    var brick_wall_count: int = 0
+    
+    for y in range(LEVEL_HEIGHT):
+        for x in range(LEVEL_WIDTH):
+            var wall_position = Vector2(x, y)
+            
+            if occupied_tiles.has(wall_position):
+                continue
+            else:
+                # Place a BRICK_WALL if limit not reached
+                if randi() % 100 < int(BRICK_WALL_FILL_RATE * 100) and brick_wall_count < max_brick_walls:
+                    place_brick_wall(Vector2(x, y))
+                    brick_wall_count += 1
