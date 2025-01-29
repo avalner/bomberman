@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=4 uid="uid://bpylit2vi7ewk"]
+[gd_scene load_steps=6 format=4 uid="uid://bpylit2vi7ewk"]
 
 [ext_resource type="Script" uid="uid://lsfhptn17nqx" path="res://scripts/main.gd" id="1_b2b57"]
 [ext_resource type="Texture2D" uid="uid://bv3od7dxw6lut" path="res://assets/Sprites.png" id="1_puhri"]
 [ext_resource type="PackedScene" uid="uid://bov22kqd0a674" path="res://scenes/player.tscn" id="2_mm0hx"]
-[ext_resource type="PackedScene" uid="uid://btkv65qao24kc" path="res://scenes/enemies/balloon_enemy.tscn" id="4_jyhfs"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lnvhd"]
 texture = ExtResource("1_puhri")
@@ -261,9 +260,6 @@ explosions_container = NodePath("../Explosions")
 metadata/_edit_lock_ = true
 
 [node name="Enemies" type="Node" parent="."]
-
-[node name="BalloonEnemy" parent="Enemies" instance=ExtResource("4_jyhfs")]
-position = Vector2(472, 168)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(249, 104)

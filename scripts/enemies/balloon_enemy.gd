@@ -27,6 +27,7 @@ func _ready() -> void:
 
 func _update_raycasts() -> void:
     await get_tree().physics_frame
+    await get_tree().physics_frame
     for raycast in raycasts:
         raycast.force_raycast_update()
     raycasts_ready = true
@@ -64,14 +65,14 @@ func _physics_process(_delta):
     move_and_slide()
 
 func isTileCenter() -> bool:
-    return Vector2i(position) % TILE_SIZE == TILE_CENTER_OFFSET
+    return Vector2i(ceil(position)) % TILE_SIZE == TILE_CENTER_OFFSET
 
 func destroy() -> void:
     is_dead = true
     animated_sprite.play("death")
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-    if body is Player:
+    if body is Player and !is_dead:
         body.destroy()
 
 
