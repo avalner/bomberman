@@ -42,6 +42,12 @@ animations = [{
 "texture": SubResource("AtlasTexture_cbgv3")
 }, {
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_cbgv3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cbgv3")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_7i7rb")
 }, {
 "duration": 1.0,
@@ -83,12 +89,14 @@ size = Vector2(12, 15)
 
 [node name="BalloonEnemy" type="CharacterBody2D" groups=["Enemies"]]
 collision_layer = 8
+collision_mask = 0
 motion_mode = 1
 script = ExtResource("1_cbgv3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 5
 sprite_frames = SubResource("SpriteFrames_lcn6b")
+animation = &"death"
 autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
