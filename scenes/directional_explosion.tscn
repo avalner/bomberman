@@ -157,7 +157,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"bottom_end",
-"speed": 15.0
+"speed": 18.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -183,7 +183,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"bottom_middle",
-"speed": 15.0
+"speed": 18.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -209,7 +209,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"left_end",
-"speed": 15.0
+"speed": 18.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -235,7 +235,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"left_middle",
-"speed": 15.0
+"speed": 18.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -261,7 +261,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"right_end",
-"speed": 15.0
+"speed": 18.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -287,7 +287,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"right_middle",
-"speed": 15.0
+"speed": 18.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -313,7 +313,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"top_end",
-"speed": 15.0
+"speed": 18.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -339,11 +339,11 @@ animations = [{
 }],
 "loop": false,
 "name": &"top_middle",
-"speed": 15.0
+"speed": 18.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c6fkk"]
-size = Vector2(12, 12)
+size = Vector2(8, 8)
 
 [node name="DirectionalExplosion" type="Area2D"]
 collision_layer = 0
