@@ -1,0 +1,64 @@
+[gd_scene load_steps=4 format=3 uid="uid://drknygpb6tdkw"]
+
+[ext_resource type="Script" uid="uid://bcrgh3al44h7n" path="res://scripts/powerup.gd" id="1_ih772"]
+[ext_resource type="Texture2D" uid="uid://bv3od7dxw6lut" path="res://assets/Sprites.png" id="2_406cw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pufsy"]
+size = Vector2(13, 13)
+
+[node name="Powerup" type="Area2D"]
+collision_layer = 32
+script = ExtResource("1_ih772")
+
+[node name="BombSprite" type="Sprite2D" parent="."]
+position = Vector2(-0.5, 0)
+texture = ExtResource("2_406cw")
+region_enabled = true
+region_rect = Rect2(0, 224, 15, 15)
+
+[node name="FireSprite" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_406cw")
+region_enabled = true
+region_rect = Rect2(16, 224, 15, 15)
+
+[node name="SpeedSprite" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_406cw")
+region_enabled = true
+region_rect = Rect2(32, 224, 15, 15)
+
+[node name="RemoteControlSprite" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_406cw")
+region_enabled = true
+region_rect = Rect2(64, 224, 15, 15)
+
+[node name="WallPassSprite" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_406cw")
+region_enabled = true
+region_rect = Rect2(48, 224, 15, 15)
+
+[node name="BombPassSprite" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_406cw")
+region_enabled = true
+region_rect = Rect2(80, 224, 15, 15)
+
+[node name="FlamePassSprite" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_406cw")
+region_enabled = true
+region_rect = Rect2(96, 224, 15, 15)
+
+[node name="InvincibilitySprite" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_406cw")
+region_enabled = true
+region_rect = Rect2(112, 224, 15, 15)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_pufsy")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

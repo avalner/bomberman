@@ -1,0 +1,52 @@
+{
+	"main_theme": {
+		"file": "res://sounds/main theme.mp3",
+		"loop": true,
+		"group": "game"
+	},
+	"powerup_theme": {
+		"file": "res://sounds/powerup_theme.mp3",
+		"loop": true,
+		"group": "game"
+	},
+	"level_start": {
+		"file": "res://sounds/level_start.mp3",
+		"group": "game"
+	},
+	"level_finished": {
+		"file": "res://sounds/level_finished.mp3",
+		"group": "game"
+	},
+    "footsteps": {
+		"file": "res://sounds/footsteps.mp3",
+		"loop": true,
+		"delay": 0.28,
+		"group": "player"
+	},
+	"footsteps_alt": {
+		"file": "res://sounds/footsteps.mp3",
+		"pitch_scale": 0.8,
+		"loop": true,
+		"delay": 0.28,
+		"group": "player"
+	},
+	"death": {
+		"file": "res://sounds/death.wav",
+		"group": "player"
+	},
+	"place_bomb": {
+		"file": "res://sounds/place_bomb.mp3"
+	},
+	"explosion": {
+		"file": "res://sounds/explosion.wav",
+		"volume_db": -6
+	},
+	"lost_life": {
+		"file": "res://sounds/lost_life.wav",
+		"volume_db": -6
+	},
+	"powerup": {
+		"file": "res://sounds/powerup.wav",
+		"volume_db": -6
+	}
+}

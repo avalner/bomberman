@@ -1,0 +1,127 @@
+[gd_scene load_steps=14 format=3 uid="uid://btkv65qao24kc"]
+
+[ext_resource type="Script" uid="uid://dl53f3juf5o2p" path="res://scripts/enemies/balloon_enemy.gd" id="1_cbgv3"]
+[ext_resource type="Texture2D" uid="uid://bv3od7dxw6lut" path="res://assets/Sprites.png" id="1_j354w"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cbgv3"]
+atlas = ExtResource("1_j354w")
+region = Rect2(96, 240, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7i7rb"]
+atlas = ExtResource("1_j354w")
+region = Rect2(112, 240, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vn0pf"]
+atlas = ExtResource("1_j354w")
+region = Rect2(128, 240, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1q670"]
+atlas = ExtResource("1_j354w")
+region = Rect2(144, 240, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ke7rj"]
+atlas = ExtResource("1_j354w")
+region = Rect2(160, 240, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kw80r"]
+atlas = ExtResource("1_j354w")
+region = Rect2(0, 240, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k0bga"]
+atlas = ExtResource("1_j354w")
+region = Rect2(16, 240, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_plx6q"]
+atlas = ExtResource("1_j354w")
+region = Rect2(32, 240, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lcn6b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cbgv3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7i7rb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vn0pf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1q670")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ke7rj")
+}],
+"loop": false,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kw80r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k0bga")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_plx6q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k0bga")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ncqr7"]
+size = Vector2(13.75, 15.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cbgv3"]
+size = Vector2(12, 15)
+
+[node name="BalloonEnemy" type="CharacterBody2D" groups=["Enemies"]]
+collision_layer = 8
+motion_mode = 1
+script = ExtResource("1_cbgv3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 5
+sprite_frames = SubResource("SpriteFrames_lcn6b")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.125, 0)
+shape = SubResource("RectangleShape2D_ncqr7")
+
+[node name="Raycasts" type="Node2D" parent="."]
+
+[node name="Top" type="RayCast2D" parent="Raycasts"]
+position = Vector2(0, -7)
+target_position = Vector2(0, -5)
+collision_mask = 22
+collide_with_areas = true
+
+[node name="Right" type="RayCast2D" parent="Raycasts"]
+position = Vector2(7, 0)
+target_position = Vector2(5, 0)
+collision_mask = 22
+
+[node name="Bottom" type="RayCast2D" parent="Raycasts"]
+position = Vector2(0, 7)
+target_position = Vector2(0, 5)
+collision_mask = 22
+
+[node name="Left" type="RayCast2D" parent="Raycasts"]
+position = Vector2(-7, 0)
+target_position = Vector2(-5, 0)
+collision_mask = 22
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_cbgv3")
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

@@ -1,0 +1,90 @@
+[gd_scene load_steps=9 format=3 uid="uid://bbn7vk0vv3yjo"]
+
+[ext_resource type="Script" uid="uid://bejiw6ddtcavf" path="res://scripts/central_explosion.gd" id="1_i25ws"]
+[ext_resource type="Texture2D" uid="uid://bv3od7dxw6lut" path="res://assets/Sprites.png" id="1_tbyam"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e235a"]
+atlas = ExtResource("1_tbyam")
+region = Rect2(32, 96, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pt2nt"]
+atlas = ExtResource("1_tbyam")
+region = Rect2(112, 96, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rj85q"]
+atlas = ExtResource("1_tbyam")
+region = Rect2(32, 176, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2nu67"]
+atlas = ExtResource("1_tbyam")
+region = Rect2(112, 176, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_00c2e"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e235a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pt2nt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rj85q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2nu67")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rj85q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pt2nt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e235a")
+}],
+"loop": false,
+"name": &"default",
+"speed": 15.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q7gd8"]
+size = Vector2(12, 12)
+
+[node name="CentralExplosion" type="Area2D"]
+collision_layer = 0
+script = ExtResource("1_i25ws")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_00c2e")
+frame_progress = 0.551677
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_q7gd8")
+
+[node name="Raycasts" type="Node2D" parent="."]
+position = Vector2(0, 2)
+
+[node name="Top" type="RayCast2D" parent="Raycasts"]
+position = Vector2(0, -9)
+target_position = Vector2(0, 0)
+collision_mask = 6
+
+[node name="Right" type="RayCast2D" parent="Raycasts"]
+position = Vector2(7, -2)
+target_position = Vector2(0, 0)
+collision_mask = 6
+
+[node name="Bottom" type="RayCast2D" parent="Raycasts"]
+position = Vector2(0, 5)
+target_position = Vector2(0, 0)
+collision_mask = 6
+
+[node name="Left" type="RayCast2D" parent="Raycasts"]
+position = Vector2(-7, -2)
+target_position = Vector2(0, 0)
+collision_mask = 6
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]

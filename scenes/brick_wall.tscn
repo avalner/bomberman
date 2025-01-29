@@ -1,0 +1,82 @@
+[gd_scene load_steps=12 format=3 uid="uid://bwbkis0noreo4"]
+
+[ext_resource type="Texture2D" uid="uid://bv3od7dxw6lut" path="res://assets/Sprites.png" id="1_7iu4m"]
+[ext_resource type="Script" uid="uid://b4ssd7jv3kdh2" path="res://scripts/brick_wall.gd" id="1_y8get"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uh4ru"]
+atlas = ExtResource("1_7iu4m")
+region = Rect2(64, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u6msh"]
+atlas = ExtResource("1_7iu4m")
+region = Rect2(80, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i0g1p"]
+atlas = ExtResource("1_7iu4m")
+region = Rect2(96, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o3y8n"]
+atlas = ExtResource("1_7iu4m")
+region = Rect2(112, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n0v85"]
+atlas = ExtResource("1_7iu4m")
+region = Rect2(128, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lccsd"]
+atlas = ExtResource("1_7iu4m")
+region = Rect2(144, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4kwyo"]
+atlas = ExtResource("1_7iu4m")
+region = Rect2(160, 48, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l1hrr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uh4ru")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u6msh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i0g1p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o3y8n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n0v85")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lccsd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4kwyo")
+}],
+"loop": false,
+"name": &"destroy",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_is8a7"]
+size = Vector2(16, 16)
+
+[node name="BrickWall" type="StaticBody2D"]
+collision_layer = 4
+collision_mask = 25
+script = ExtResource("1_y8get")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_l1hrr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_is8a7")
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
