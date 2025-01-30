@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://btkv65qao24kc"]
 
-[ext_resource type="Script" uid="uid://dl53f3juf5o2p" path="res://scripts/enemies/balloon_enemy.gd" id="1_cbgv3"]
+[ext_resource type="Script" uid="uid://dl53f3juf5o2p" path="res://scripts/enemies/valcom.gd" id="1_cbgv3"]
 [ext_resource type="Texture2D" uid="uid://bv3od7dxw6lut" path="res://assets/Sprites.png" id="1_j354w"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cbgv3"]
@@ -87,7 +87,7 @@ size = Vector2(13.75, 15.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cbgv3"]
 size = Vector2(12, 15)
 
-[node name="BalloonEnemy" type="CharacterBody2D" groups=["Enemies"]]
+[node name="Valcom" type="CharacterBody2D" groups=["Enemies"]]
 collision_layer = 8
 collision_mask = 0
 motion_mode = 1

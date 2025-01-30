@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-class_name BalloonEnemy
+class_name Valcom
 
 const TILE_SIZE = Globals.TILE_SIZE
 const HALF_TILE_SIZE: int = 8

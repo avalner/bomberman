@@ -3,7 +3,7 @@ extends Node
 const BRICK_WALL = preload("res://scenes/brick_wall.tscn")
 const LEVEL_EXIT_DOOR = preload("res://scenes/level_exit_door.tscn")
 const POWERUP = preload("res://scenes/powerup.tscn")
-const BALLOON_ENEMY = preload("res://scenes/enemies/balloon_enemy.tscn")
+const BALLOON_ENEMY = preload("res://scenes/enemies/valcom.tscn")
 
 const TILE_SIZE = Globals.TILE_SIZE
 const LEVEL_WIDTH = 29
@@ -28,13 +28,11 @@ func procedurely_generate_level() -> void:
     var exit_door_position: Vector2 = get_random_tile_position(occupied_tiles)
 
     place_power_up(powerup_position, Powerup.PowerupType.BOMB_COUNT)
-
     place_level_exit_door(exit_door_position)
-    place_brick_wall(exit_door_position) # Place a BRICK_WALL over the POWERUP
     
     var max_brick_walls: int = int(occupied_tiles.size() * BRICK_WALL_FILL_RATE)
     place_brick_walls(max_brick_walls, occupied_tiles)
-    place_balloons(5, occupied_tiles)
+    place_valcoms(5, occupied_tiles)
 
 func get_random_tile_position(occupied_tiles: Array[Vector2]) -> Vector2:
     var x: int = randi() % LEVEL_WIDTH
@@ -83,9 +81,9 @@ func place_brick_wall(brick_position: Vector2) -> void:
     brick_wall.position = brick_position * TILE_SIZE + LEVEL_OFFSET
     brick_walls_container.add_child(brick_wall)
 
-func place_balloons(count: int, occupied_tiles: Array[Vector2]) -> void:
+func place_valcoms(count: int, occupied_tiles: Array[Vector2]) -> void:
     for i in count:
-        var balloon: BalloonEnemy = BALLOON_ENEMY.instantiate()
+        var balloon: Valcom = BALLOON_ENEMY.instantiate()
         var balloon_position: Vector2 = get_random_tile_position(occupied_tiles)
         balloon.position = balloon_position * TILE_SIZE + LEVEL_OFFSET
         enemies_container.add_child(balloon)
