@@ -3,14 +3,14 @@ extends Node
 const BRICK_WALL = preload("res://scenes/brick_wall.tscn")
 const LEVEL_EXIT_DOOR = preload("res://scenes/level_exit_door.tscn")
 const POWERUP = preload("res://scenes/powerup.tscn")
-const BALLOON_ENEMY = preload("res://scenes/enemies/valcom.tscn")
+const VALCOM = preload("res://scenes/enemies/valcom.tscn")
 
 const TILE_SIZE = Globals.TILE_SIZE
-const LEVEL_WIDTH = 29
-const LEVEL_HEIGHT = 11
+const LEVEL_WIDTH = Globals.LEVEL_WIDTH
+const LEVEL_HEIGHT = Globals.LEVEL_HEIGHT
 const PLAYER_AREA_SIZE = 3
-const BRICK_WALL_FILL_RATE = 0.5
-const LEVEL_OFFSET = Vector2(TILE_SIZE, TILE_SIZE) * 1.5
+const BRICK_WALL_FILL_RATE = 0.8
+const LEVEL_OFFSET = Globals.LEVEL_OFFSET
 
 @onready var brick_walls_container: Node = $BrickWalls
 @onready var enemies_container: Node = $Enemies
@@ -51,7 +51,7 @@ func get_concrete_tiles() -> Array[Vector2]:
     
     for x in range(LEVEL_WIDTH):
         for y in range(LEVEL_HEIGHT):
-            if y % 2 != 0 or x % 2 != 0:
+            if y % 2 != 0 and x % 2 != 0:
                 concrete_tile_positions.append(Vector2(x, y))
     return concrete_tile_positions
 
@@ -83,22 +83,12 @@ func place_brick_wall(brick_position: Vector2) -> void:
 
 func place_valcoms(count: int, occupied_tiles: Array[Vector2]) -> void:
     for i in count:
-        var balloon: Valcom = BALLOON_ENEMY.instantiate()
+        var balloon: Valcom = VALCOM.instantiate()
         var balloon_position: Vector2 = get_random_tile_position(occupied_tiles)
         balloon.position = balloon_position * TILE_SIZE + LEVEL_OFFSET
         enemies_container.add_child(balloon)
 
 func place_brick_walls(max_brick_walls: int, occupied_tiles: Array[Vector2]) -> void:
-    var brick_wall_count: int = 0
-    
-    for y in range(LEVEL_HEIGHT):
-        for x in range(LEVEL_WIDTH):
-            var wall_position: Vector2 = Vector2(x, y)
-            
-            if occupied_tiles.has(wall_position):
-                continue
-            else:
-                # Place a BRICK_WALL if limit not reached
-                if randi() % 100 < int(BRICK_WALL_FILL_RATE * 100) and brick_wall_count < max_brick_walls:
-                    place_brick_wall(Vector2(x, y))
-                    brick_wall_count += 1
+    for i in range(max_brick_walls):
+        var brick_position: Vector2 = get_random_tile_position(occupied_tiles)
+        place_brick_wall(brick_position)
