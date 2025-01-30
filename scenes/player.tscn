@@ -181,7 +181,7 @@ position = Vector2(3, -2)
 polygon = PackedVector2Array(-1, 10.2, 4.8, 4, 4.8, 0.4, -1, -5.4, -5, -5.4, -10.8, 0.4, -10.8, 4, -5, 10.2)
 one_way_collision_margin = 0.0
 
-[node name="BambPlacementSystem" type="Node" parent="."]
+[node name="BombPlacementSystem" type="Node" parent="."]
 script = ExtResource("3_6rk72")
 
 [node name="AnimationProcessor" type="Node" parent="."]

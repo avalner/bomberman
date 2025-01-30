@@ -1,6 +1,9 @@
 extends Node
 
 const TILE_SIZE = 16
+const LEVEL_WIDTH = 29
+const LEVEL_HEIGHT = 11
+const LEVEL_OFFSET = Vector2(TILE_SIZE, TILE_SIZE) * 1.5
 const AUTO_DETONATE_DELAY: float = 0.2
 
 enum GameState {
