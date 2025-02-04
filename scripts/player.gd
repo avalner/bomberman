@@ -1,9 +1,18 @@
+@tool
 extends CharacterBody2D
 
 class_name Player
 
-@export var bombs_container: Node = null
-@export var explosions_container: Node = null
+@export var bombs_container: Node = null:
+	set(value):
+		bombs_container = value
+		update_configuration_warnings()
+		
+@export var explosions_container: Node = null:
+	set(value):
+		explosions_container = value
+		update_configuration_warnings()
+
 @onready var bomb_placement_system: BombPlacementSystem = $BombPlacementSystem
 @onready var player_animations: AnimatedSprite2D = $PlayerAnimations
 
@@ -103,3 +112,14 @@ func _on_player_animations_animation_finished() -> void:
 	if state == PlayerState.DYING:
 		queue_free()
 		changeState(PlayerState.DEAD)
+		
+func _get_configuration_warnings() -> PackedStringArray:
+	var warnings: PackedStringArray = PackedStringArray()
+	
+	if !bombs_container:
+		warnings.append("bombs_container is mandatory")
+	
+	if !explosions_container:
+		warnings.append("explosions_container is mandatory")
+	
+	return warnings
