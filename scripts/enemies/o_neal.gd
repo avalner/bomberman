@@ -1,9 +1,9 @@
 extends Enemy
 
-class_name Valcom
+class_name ONeal
 
-const SPEED: int = 30
-	
+const SPEED: int = 40
+
 func _tile_center_process(available_directions: Array[Vector2]) -> void:
 	match state:
 		State.MOVING:
