@@ -79,6 +79,14 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kw80r")
+}],
+"loop": true,
+"name": &"thinking",
+"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ncqr7"]
@@ -96,7 +104,7 @@ script = ExtResource("1_cbgv3")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 5
 sprite_frames = SubResource("SpriteFrames_lcn6b")
-animation = &"death"
+animation = &"thinking"
 autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
