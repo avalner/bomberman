@@ -105,7 +105,7 @@ func get_available_directions() -> Array[Vector2]:
 	
 	return available_directions
 
-func destroy() -> void:
+func destroy(_source: Node) -> void:
 	change_state(State.DEAD)
 	animated_sprite.play("death")
 
@@ -126,7 +126,7 @@ func _on_state_changed(new_state: State, _old_state: State) -> void:
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is Player and state != State.DEAD:
-		body.destroy()
+		body.destroy(self)
 
 
 func _on_animated_sprite_2d_animation_finished() -> void:

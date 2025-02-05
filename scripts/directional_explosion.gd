@@ -9,12 +9,12 @@ func playAnimation(animation_name: String) -> void:
 
 func _on_body_entered(body:Node2D) -> void:
     if body.has_method("destroy"):
-        body.destroy()
+        body.destroy(self)
 
 
 func _on_area_entered(area: Area2D) -> void:
     if area.has_method("destroy"):
-        area.destroy()
+        area.destroy(self)
 
 
 func _on_animated_sprite_2d_animation_finished() -> void:

@@ -88,4 +88,4 @@ func update_explosion_for_frame() -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.has_method("destroy"):
-		body.destroy()
+		body.destroy(self)

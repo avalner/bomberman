@@ -34,6 +34,8 @@ var state := PlayerState.IDLE
 
 func _ready() -> void:
 	motion_mode = MotionMode.MOTION_MODE_FLOATING
+	Globals.wall_pass_changed.connect(_on_wall_pass_changed)
+	Globals.bomb_pass_changed.connect(_on_bomb_pass_changed)
 
 func changeState(new_state: PlayerState) -> void:
 	if state != new_state:
@@ -86,12 +88,29 @@ func remove() -> void:
 	queue_free()
 	
 
-func destroy() -> void:
+func destroy(source: Node) -> void:
 	if state == PlayerState.DEAD:
+		return
+
+	if (source is CentralExplosion or source is DirectionalExplosion) and Globals.immune_to_explosions:
+		return
+
+	if source is Enemy and Globals.invincible:
 		return
 	
 	changeState(PlayerState.DYING)
 
+func _on_wall_pass_changed(wall_pass: bool) -> void:
+	if wall_pass:
+		collision_mask &= ~(1 << 2) # Remove the WALL layer from the collision mask
+	else:
+		collision_mask |= (1 << 2) # Add the WALL layer to the collision mask
+
+func _on_bomb_pass_changed(bomb_pass: bool) -> void:
+	if bomb_pass:
+		collision_mask &= ~(1 << 4) # Remove the BOMB layer from the collision mask
+	else:
+		collision_mask |= (1 << 4) # Add the BOMB layer to the collision mask
 
 func _on_player_animations_animation_finished() -> void:
 	if state == PlayerState.DYING:

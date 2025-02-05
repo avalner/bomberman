@@ -32,11 +32,9 @@ func procedurely_generate_level() -> void:
 	var occupied_tiles: Array[Vector2] = []
 	occupied_tiles.append_array(get_player_start_area_tiles())
 	occupied_tiles.append_array(get_concrete_tiles())
-	var powerup_position: Vector2 = get_random_tile_position(occupied_tiles)
-	var exit_door_position: Vector2 = get_random_tile_position(occupied_tiles)
-
-	place_power_up(powerup_position, Powerup.PowerupType.BOMB_COUNT)
-	place_level_exit_door(exit_door_position)
+	
+	place_random_powerup(occupied_tiles)
+	place_level_exit_door(occupied_tiles)
 	
 	var max_brick_walls: int = int(occupied_tiles.size() * BRICK_WALL_FILL_RATE)
 	place_brick_walls(max_brick_walls, occupied_tiles)
@@ -71,12 +69,43 @@ func get_player_start_area_tiles() -> Array[Vector2]:
 			player_start_area_tiles.append(Vector2(x, y))
 	return player_start_area_tiles
 
-func place_level_exit_door(exit_door_position: Vector2) -> void:
+func place_level_exit_door(occupied_tiles: Array[Vector2]) -> void:
+	var exit_door_position: Vector2 = get_random_tile_position(occupied_tiles)
 	var door: LevelExitDoor = LEVEL_EXIT_DOOR.instantiate()
 	door.name = "LevelExitDoor"
 	door.position = exit_door_position * TILE_SIZE + LEVEL_OFFSET
 	brick_walls_container.add_child(door)
 	place_brick_wall(exit_door_position) # Place a BRICK_WALL over the LEVEL_EXIT_DOOR
+
+func place_random_powerup(occupied_tiles: Array[Vector2]) -> void:
+	var powerup_position: Vector2 = get_random_tile_position(occupied_tiles)
+	var powerup_type: Powerup.PowerupType = Powerup.PowerupType.NONE
+	var random: float = randf()
+	
+	if  random < 0.8:
+		random = randf()
+		
+		if random < 0.25:
+			powerup_type = Powerup.PowerupType.BOMB_COUNT
+		elif random < 0.5:
+			powerup_type = Powerup.PowerupType.EXPLOSION_SIZE
+		elif random < 0.75:
+			powerup_type = Powerup.PowerupType.SPEED
+		else:
+			powerup_type = Powerup.PowerupType.REMOTE_CONTROL
+	else:
+		random = randf()
+
+		if random < 0.3:
+			powerup_type = Powerup.PowerupType.WALL_PASS
+		elif random < 0.6:
+			powerup_type = Powerup.PowerupType.BOMB_PASS
+		elif random < 0.9:
+			powerup_type = Powerup.PowerupType.FLAME_PASS
+		else:
+			powerup_type = Powerup.PowerupType.INVINCIBILITY
+	
+	place_power_up(powerup_position, powerup_type)
 
 func place_power_up(power_up_position: Vector2, type: Powerup.PowerupType) -> void:
 	var powerup: Powerup = POWERUP.instantiate()
