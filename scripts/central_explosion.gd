@@ -33,9 +33,7 @@ func _ready() -> void:
 			var collider: Object = raycast.get_collider()
 			var collision_point: Vector2 = to_local(raycast.get_collision_point())
 			var tile_coords: Vector2 = Vector2(floor(collision_point.x / Globals.TILE_SIZE), floor(collision_point.y / Globals.TILE_SIZE))
-			var collider_position: Vector2 = tile_coords * Globals.TILE_SIZE
-			var collider_distance_vec: Vector2 = abs(raycast.position - collider_position) / Globals.TILE_SIZE
-			var collider_distance: int = floor(max(collider_distance_vec.x, collider_distance_vec.y))
+			var collider_distance: int = max(abs(tile_coords.x if tile_coords.x >= 0 else tile_coords.x + 1), abs(tile_coords.y if tile_coords.y >= 0 else tile_coords.y + 1))
 			
 			flame_size = min(flame_size, collider_distance)
 
@@ -43,7 +41,8 @@ func _ready() -> void:
 				brick_walls.append(collider)
 		
 		flame_sizes.append(flame_size)
-		explosion_center_sprite.play()
+
+	explosion_center_sprite.play()
 
 func _on_animated_sprite_2d_animation_finished() -> void:
 	queue_free()

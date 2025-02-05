@@ -102,15 +102,15 @@ func destroy(source: Node) -> void:
 
 func _on_wall_pass_changed(wall_pass: bool) -> void:
 	if wall_pass:
-		collision_mask &= ~(1 << 2) # Remove the WALL layer from the collision mask
+		collision_mask &= ~Utils.COLLISTION_MASK.BRICK_WALLS
 	else:
-		collision_mask |= (1 << 2) # Add the WALL layer to the collision mask
+		collision_mask |= Utils.COLLISTION_MASK.BRICK_WALLS
 
 func _on_bomb_pass_changed(bomb_pass: bool) -> void:
 	if bomb_pass:
-		collision_mask &= ~(1 << 4) # Remove the BOMB layer from the collision mask
+		collision_mask &= ~Utils.COLLISTION_MASK.BOMB 
 	else:
-		collision_mask |= (1 << 4) # Add the BOMB layer to the collision mask
+		collision_mask |= Utils.COLLISTION_MASK.BOMB
 
 func _on_player_animations_animation_finished() -> void:
 	if state == PlayerState.DYING:

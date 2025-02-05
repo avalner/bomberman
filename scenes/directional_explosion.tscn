@@ -352,7 +352,7 @@ script = ExtResource("1_cicy2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_hl8t7")
-animation = &"bottom_end"
+animation = &"bottom_middle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_c6fkk")

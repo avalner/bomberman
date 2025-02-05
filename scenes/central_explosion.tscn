@@ -54,36 +54,43 @@ size = Vector2(12, 12)
 [node name="CentralExplosion" type="Area2D"]
 collision_layer = 0
 script = ExtResource("1_i25ws")
+metadata/_edit_lock_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_00c2e")
 frame_progress = 0.551677
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_q7gd8")
+metadata/_edit_lock_ = true
 
 [node name="Raycasts" type="Node2D" parent="."]
-position = Vector2(0, 2)
+metadata/_edit_lock_ = true
 
 [node name="Top" type="RayCast2D" parent="Raycasts"]
-position = Vector2(0, -9)
+position = Vector2(0, -7)
 target_position = Vector2(0, 0)
 collision_mask = 6
+metadata/_edit_lock_ = true
 
 [node name="Right" type="RayCast2D" parent="Raycasts"]
-position = Vector2(7, -2)
+position = Vector2(7, 0)
 target_position = Vector2(0, 0)
 collision_mask = 6
+metadata/_edit_lock_ = true
 
 [node name="Bottom" type="RayCast2D" parent="Raycasts"]
-position = Vector2(0, 5)
+position = Vector2(0, 7)
 target_position = Vector2(0, 0)
 collision_mask = 6
+metadata/_edit_lock_ = true
 
 [node name="Left" type="RayCast2D" parent="Raycasts"]
-position = Vector2(-7, -2)
+position = Vector2(-7, 0)
 target_position = Vector2(0, 0)
 collision_mask = 6
+metadata/_edit_lock_ = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

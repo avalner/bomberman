@@ -26,12 +26,12 @@ func _on_timer_timeout() -> void:
 			
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	# Enable bomb collistion mask when player leaves the bomb area
-	if body is Player:		
+	if body is Player:
 		if unexited_bombs > 0:
 			unexited_bombs -= 1
 		
 		if unexited_bombs == 0:
-			body.collision_mask = body.collision_mask | (1 << 4) # 1 << 4 is the bomb layer
+			body.collision_mask |= Utils.COLLISTION_MASK.BOMB
 
 func detonate() -> void:
 	SoundsPlayer.play_sound("explosion")

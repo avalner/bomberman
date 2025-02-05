@@ -57,5 +57,5 @@ func _on_body_entered(body: Node2D) -> void:
 		body.apply_powerup(powerup_type)
 	queue_free()
 
-func destroy() -> void:
+func destroy(_source: Node) -> void:
 	queue_free()

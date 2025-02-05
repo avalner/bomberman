@@ -28,7 +28,7 @@ func place_bomb() -> void:
 		bomb.explosion_size = Globals.explosion_size
 		bomb.auto_detonate = Globals.auto_detonate
 		bomb.explosions_container = explosions_container
-		player.collision_mask &= ~(1 << 4) # 1 << 4 is the bomb layer
+		player.collision_mask &= ~Utils.COLLISTION_MASK.BOMB
 		bombs_container.add_child(bomb)
 
 func detonate_bombs() -> void:

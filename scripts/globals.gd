@@ -78,7 +78,7 @@ var max_bomb_count: int = 1:
 		max_bomb_count = value
 		max_bomb_count_changed.emit(max_bomb_count)
 
-var explosion_size: int = 1:
+var explosion_size: int = 2:
 	set(value):
 		if value == explosion_size: return
 		explosion_size = value
@@ -96,7 +96,7 @@ var wall_pass: bool = false:
 		wall_pass = value
 		wall_pass_changed.emit(wall_pass)
 
-var immune_to_explosions: bool = false:
+var immune_to_explosions: bool = true:
 	set(value):
 		if value == immune_to_explosions: return
 		immune_to_explosions = value
@@ -152,6 +152,10 @@ func reset_game_state() -> void:
 	max_bomb_count = 1
 	explosion_size = 1
 	auto_detonate = true
+	wall_pass = false
+	immune_to_explosions = false
+	bomb_pass = false
+	invincible = false
 	picked_powerup = Powerup.PowerupType.NONE
 
 func _on_game_timer_timeout() -> void:
