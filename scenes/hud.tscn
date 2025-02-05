@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=3 uid="uid://cqjc62a5su4ei"]
+
+[ext_resource type="FontFile" uid="uid://b05wi0nkx1rym" path="res://fonts/PressStart2P-Regular.ttf" id="1_ahhtf"]
+[ext_resource type="Script" uid="uid://bybqkke5jgh1s" path="res://scripts/hud.gd" id="1_oo0fn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oo0fn"]
+content_margin_left = 10.0
+content_margin_right = 10.0
+corner_detail = 1
+
+[node name="Hud" type="PanelContainer"]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.1
+offset_bottom = 0.799999
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_oo0fn")
+script = ExtResource("1_oo0fn")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="TimeLabel" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_ahhtf")
+theme_override_font_sizes/font_size = 8
+text = "TIME: 200"
+uppercase = true
+
+[node name="ScoreLabel" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_ahhtf")
+theme_override_font_sizes/font_size = 8
+text = "SCORE: 0"
+uppercase = true
+
+[node name="LivesLabel" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_ahhtf")
+theme_override_font_sizes/font_size = 8
+text = "LIVES: 3"
+uppercase = true

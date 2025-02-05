@@ -26,7 +26,10 @@ gdscript/warnings/untyped_declaration=2
 
 [display]
 
-window/size/viewport_width=1552
+window/size/viewport_width=496
+window/size/viewport_height=232
+window/size/window_width_override=1488
+window/size/window_height_override=696
 window/stretch/mode="canvas_items"
 window/vsync/vsync_mode=0
 

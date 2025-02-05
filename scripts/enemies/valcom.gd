@@ -4,6 +4,9 @@ class_name Valcom
 
 const SPEED: int = 30
 	
+func _init() -> void:
+	enemy_type = EnemyType.VALCOM
+
 func _tile_center_process(available_directions: Array[Vector2]) -> void:
 	match state:
 		State.MOVING:

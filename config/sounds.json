@@ -22,6 +22,11 @@
 		"volume_db": -6,
 		"group": "game"
 	},
+	"game_over": {
+		"file": "res://sounds/game_over.mp3",
+		"volume_db": -6,
+		"group": "game"
+	},
     "footsteps": {
 		"file": "res://sounds/footsteps.mp3",
 		"loop": true,
@@ -48,6 +53,14 @@
 	},
 	"powerup": {
 		"file": "res://sounds/powerup.wav",
+		"volume_db": -6
+	},
+	"timer_tick": {
+		"file": "res://sounds/timer_tick.mp3",
+		"volume_db": -6
+	},
+	"timer_last_tick": {
+		"file": "res://sounds/timer_last_tick.mp3",
 		"volume_db": -6
 	}
 }

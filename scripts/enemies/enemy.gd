@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 class_name Enemy
 
+enum EnemyType { VALCOM, ONEAL }
 enum State {MOVING, THINKING, MOVING_TO_PLAYER, DEAD}
 
 const TILE_SIZE = Globals.TILE_SIZE
@@ -18,6 +19,7 @@ const MAX_TIME_TO_THINK: float = 1.0
 
 signal state_changed(state: State, old_state: State)
 
+var enemy_type: EnemyType
 var state: State = State.MOVING
 var raycasts: Array[RayCast2D] = []
 var raycasts_ready: bool = false
@@ -70,7 +72,7 @@ func adjust_sprite_direction() -> void:
 			animated_sprite.flip_h = false
 
 func _physics_process(_delta: float) -> void:
-	if !raycasts_ready or state == State.DEAD:
+	if !raycasts_ready or state == State.DEAD or Globals.game_state == Globals.GameState.LEVEL_START:
 		velocity = Vector2.ZERO
 		return
 	
@@ -111,6 +113,7 @@ func _on_state_changed(new_state: State, _old_state: State) -> void:
 	match new_state:
 		State.DEAD:
 			velocity = Vector2.ZERO
+			Globals.enemy_killed.emit(enemy_type)
 		State.MOVING:
 			animated_sprite.play("default")
 		State.THINKING:

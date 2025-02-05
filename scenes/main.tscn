@@ -1,8 +1,11 @@
-[gd_scene load_steps=6 format=4 uid="uid://bpylit2vi7ewk"]
+[gd_scene load_steps=9 format=4 uid="uid://bpylit2vi7ewk"]
 
 [ext_resource type="Script" uid="uid://lsfhptn17nqx" path="res://scripts/main.gd" id="1_b2b57"]
 [ext_resource type="Texture2D" uid="uid://bv3od7dxw6lut" path="res://assets/Sprites.png" id="1_puhri"]
 [ext_resource type="PackedScene" uid="uid://bov22kqd0a674" path="res://scenes/player.tscn" id="2_mm0hx"]
+[ext_resource type="PackedScene" uid="uid://cqjc62a5su4ei" path="res://scenes/hud.tscn" id="4_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://dd30q6pl2mil3" path="res://scenes/game_over.tscn" id="5_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://cb8hn6t0rn3ra" path="res://scenes/level_start.tscn" id="6_tefeu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lnvhd"]
 texture = ExtResource("1_puhri")
@@ -241,32 +244,33 @@ sources/0 = SubResource("TileSetAtlasSource_lnvhd")
 [node name="main" type="Node"]
 script = ExtResource("1_b2b57")
 
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
+[node name="Root" type="Node2D" parent="."]
+position = Vector2(0, 24)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Root"]
 tile_map_data = PackedByteArray("AAAAAAAAAAADAAMAAAAAAAEAAAADAAMAAAAAAAIAAAADAAMAAAAAAAMAAAADAAMAAAAAAAQAAAADAAMAAAAAAAUAAAADAAMAAAAAAAYAAAADAAMAAAAAAAcAAAADAAMAAAAAAAgAAAADAAMAAAAAAAkAAAADAAMAAAAAAAoAAAADAAMAAAABAAAAAAADAAMAAAACAAAAAAADAAMAAAADAAAAAAADAAMAAAAEAAAAAAADAAMAAAAFAAAAAAADAAMAAAAGAAAAAAADAAMAAAAHAAAAAAADAAMAAAAIAAAAAAADAAMAAAAJAAAAAAADAAMAAAAKAAAAAAADAAMAAAALAAAAAAADAAMAAAAMAAAAAAADAAMAAAARAAAAAAADAAMAAAASAAAAAAADAAMAAAATAAAAAAADAAMAAAAUAAAAAAADAAMAAAAVAAAAAAADAAMAAAACAAIAAAADAAMAAAACAAQAAAADAAMAAAACAAYAAAADAAMAAAACAAgAAAADAAMAAAACAAoAAAADAAMAAAAAAAsAAAADAAMAAAAAAAwAAAADAAMAAAABAAwAAAADAAMAAAACAAwAAAADAAMAAAADAAwAAAADAAMAAAAEAAwAAAADAAMAAAAFAAwAAAADAAMAAAAGAAwAAAADAAMAAAAHAAwAAAADAAMAAAAIAAwAAAADAAMAAAAJAAwAAAADAAMAAAAKAAwAAAADAAMAAAALAAwAAAADAAMAAAAMAAwAAAADAAMAAAANAAwAAAADAAMAAAAOAAwAAAADAAMAAAAPAAwAAAADAAMAAAAQAAwAAAADAAMAAAARAAwAAAADAAMAAAASAAwAAAADAAMAAAATAAwAAAADAAMAAAAUAAwAAAADAAMAAAAVAAwAAAADAAMAAAAEAAIAAAADAAMAAAAGAAIAAAADAAMAAAAIAAIAAAADAAMAAAAKAAIAAAADAAMAAAAMAAIAAAADAAMAAAAOAAIAAAADAAMAAAAQAAIAAAADAAMAAAASAAIAAAADAAMAAAAUAAIAAAADAAMAAAAWAAIAAAADAAMAAAAYAAIAAAADAAMAAAAaAAIAAAADAAMAAAAcAAIAAAADAAMAAAAWAAAAAAADAAMAAAAXAAAAAAADAAMAAAAYAAAAAAADAAMAAAAZAAAAAAADAAMAAAAaAAAAAAADAAMAAAAbAAAAAAADAAMAAAAcAAAAAAADAAMAAAAdAAAAAAADAAMAAAAeAAAAAAADAAMAAAAeAAEAAAADAAMAAAAeAAIAAAADAAMAAAAeAAMAAAADAAMAAAAeAAQAAAADAAMAAAAeAAUAAAADAAMAAAAeAAYAAAADAAMAAAAeAAcAAAADAAMAAAAWAAwAAAADAAMAAAAXAAwAAAADAAMAAAAYAAwAAAADAAMAAAAZAAwAAAADAAMAAAAaAAwAAAADAAMAAAAbAAwAAAADAAMAAAAcAAwAAAADAAMAAAAdAAwAAAADAAMAAAAeAAwAAAADAAMAAAAeAAgAAAADAAMAAAAeAAkAAAADAAMAAAAeAAoAAAADAAMAAAAeAAsAAAADAAMAAAAEAAoAAAADAAMAAAAIAAoAAAADAAMAAAAKAAoAAAADAAMAAAAMAAoAAAADAAMAAAAOAAoAAAADAAMAAAASAAoAAAADAAMAAAAUAAoAAAADAAMAAAAWAAoAAAADAAMAAAAYAAoAAAADAAMAAAAaAAoAAAADAAMAAAAcAAoAAAADAAMAAAAcAAgAAAADAAMAAAAaAAgAAAADAAMAAAAYAAgAAAADAAMAAAAWAAgAAAADAAMAAAAUAAgAAAADAAMAAAASAAgAAAADAAMAAAAQAAgAAAADAAMAAAAOAAgAAAADAAMAAAAMAAgAAAADAAMAAAAKAAgAAAADAAMAAAAIAAgAAAADAAMAAAAGAAgAAAADAAMAAAAEAAgAAAADAAMAAAAEAAYAAAADAAMAAAAGAAYAAAADAAMAAAAIAAYAAAADAAMAAAAKAAYAAAADAAMAAAAMAAYAAAADAAMAAAAOAAYAAAADAAMAAAAQAAYAAAADAAMAAAASAAYAAAADAAMAAAAUAAYAAAADAAMAAAAWAAYAAAADAAMAAAAYAAYAAAADAAMAAAAaAAYAAAADAAMAAAAcAAYAAAADAAMAAAAcAAQAAAADAAMAAAAaAAQAAAADAAMAAAAYAAQAAAADAAMAAAAWAAQAAAADAAMAAAAUAAQAAAADAAMAAAASAAQAAAADAAMAAAAQAAQAAAADAAMAAAAOAAQAAAADAAMAAAAMAAQAAAADAAMAAAAKAAQAAAADAAMAAAAIAAQAAAADAAMAAAAGAAQAAAADAAMAAAANAAAAAAADAAMAAAAOAAAAAAADAAMAAAAPAAAAAAADAAMAAAAQAAAAAAADAAMAAAAGAAoAAAADAAMAAAAEAAQAAAADAAMAAAAQAAoAAAADAAMAAAA=")
 tile_set = SubResource("TileSet_gfx4h")
-metadata/_edit_lock_ = true
 
-[node name="BrickWalls" type="Node2D" parent="."]
-metadata/_edit_lock_ = true
+[node name="BrickWalls" type="Node2D" parent="Root"]
 
-[node name="Bombs" type="Node2D" parent="."]
-metadata/_edit_lock_ = true
+[node name="Bombs" type="Node2D" parent="Root"]
 
-[node name="Explosions" type="Node2D" parent="."]
-metadata/_edit_lock_ = true
+[node name="Explosions" type="Node2D" parent="Root"]
 
-[node name="Player" parent="." node_paths=PackedStringArray("bombs_container", "explosions_container") instance=ExtResource("2_mm0hx")]
+[node name="Player" parent="Root" node_paths=PackedStringArray("bombs_container", "explosions_container") instance=ExtResource("2_mm0hx")]
 unique_name_in_owner = true
 position = Vector2(24, 24)
 bombs_container = NodePath("../Bombs")
 explosions_container = NodePath("../Explosions")
-metadata/_edit_lock_ = true
 
-[node name="Enemies" type="Node2D" parent="."]
-metadata/_edit_lock_ = true
+[node name="Enemies" type="Node2D" parent="Root"]
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(249, 104)
-scale = Vector2(-1.04628e+12, -7.22039e+07)
-zoom = Vector2(3, 3)
-metadata/_edit_lock_ = true
+[node name="GameTimer" type="Timer" parent="Root"]
+
+[node name="Hud" parent="." instance=ExtResource("4_jyhfs")]
+
+[node name="GameOver" parent="." instance=ExtResource("5_tbgi4")]
+visible = false
+
+[node name="LevelStart" parent="." instance=ExtResource("6_tefeu")]
+visible = false

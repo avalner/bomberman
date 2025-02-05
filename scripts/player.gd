@@ -16,13 +16,6 @@ class_name Player
 @onready var bomb_placement_system: BombPlacementSystem = $BombPlacementSystem
 @onready var player_animations: AnimatedSprite2D = $PlayerAnimations
 
-static var speed: float = 50
-static var max_bomb_count: int = 1
-static var explosion_size: int = 1
-static var auto_detonate: bool = true
-
-var picked_powerup: Powerup.PowerupType = Powerup.PowerupType.BOMB_COUNT
-
 enum PlayerState {
 	IDLE,
 	MOVING_UP,
@@ -71,13 +64,13 @@ func _input(event: InputEvent) -> void:
 func _physics_process(_delta: float) -> void:
 	match state:
 		PlayerState.MOVING_RIGHT:
-			velocity = Vector2.RIGHT * speed
+			velocity = Vector2.RIGHT * Globals.speed
 		PlayerState.MOVING_LEFT:
-			velocity = Vector2.LEFT * speed
+			velocity = Vector2.LEFT * Globals.speed
 		PlayerState.MOVING_DOWN:
-			velocity = Vector2.DOWN * speed
+			velocity = Vector2.DOWN * Globals.speed
 		PlayerState.MOVING_UP:
-			velocity = Vector2.UP * speed
+			velocity = Vector2.UP * Globals.speed
 		_:
 			velocity = Vector2.ZERO
 		
@@ -85,17 +78,6 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 func apply_powerup(powerup: Powerup.PowerupType) -> void:
-	match powerup:
-		Powerup.PowerupType.SPEED:
-			speed += 10
-		Powerup.PowerupType.BOMB_COUNT:
-			max_bomb_count += 1
-		Powerup.PowerupType.EXPLOSION_SIZE:
-			explosion_size += 1
-		Powerup.PowerupType.REMOTE_CONTROL:
-			auto_detonate = false
-	
-	picked_powerup = powerup
 	powerup_taken.emit(powerup)
 		
 
@@ -105,6 +87,9 @@ func remove() -> void:
 	
 
 func destroy() -> void:
+	if state == PlayerState.DEAD:
+		return
+	
 	changeState(PlayerState.DYING)
 
 

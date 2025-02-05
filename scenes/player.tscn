@@ -169,6 +169,7 @@ animations = [{
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_mask = 54
+motion_mode = 1
 safe_margin = 0.001
 script = ExtResource("1_26u3r")
 
