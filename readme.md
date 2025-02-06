@@ -1,4 +1,4 @@
-# Bomberman Game
+-# Bomberman Game
 
 This is a remake of the classic Bomberman game developed using the Godot Engine. The game features various player states, animations, sounds, and power-ups.
 
@@ -17,6 +17,13 @@ This is a remake of the classic Bomberman game developed using the Godot Engine.
 
 1. Open the project in Godot Engine 4.4 beta or more recent version.
 2. Run the project by pressing the play button or using the shortcut `F5`.
+
+## Key bindings
+
+- `Up/W`, `Right/D`, `Down/S`, `Left/A` - movement
+- `Space` - place bomb
+- `Ctrl` - detonate bombs
+- `Esc` - pause the game
 
 ## License
 
