@@ -6,7 +6,7 @@ class_name LevelExitDoor
 var is_player_inside := false
 var player: Player
 
-func check_if_centered(body: Node2D) -> void:
+func is_centered(body: Node2D) -> bool:
     # Get the global positions of the Area2D and the player
     var area_position: Vector2 = global_position
     var player_position: Vector2 = body.global_position
@@ -15,8 +15,8 @@ func check_if_centered(body: Node2D) -> void:
     var distance: float = player_position.distance_to(area_position)
 
     # Check if the centers are approximately aligned
-    if distance < 1.0: # Tweak this value to adjust the alignment threshold
-        Globals.complete_level()
+    return distance < 1.0 # Tweak this value to adjust the alignment threshold
+        
 
 func _on_body_entered(body:Node2D) -> void:
     if body is Player:
@@ -28,6 +28,7 @@ func _on_body_exited(body:Node2D) -> void:
         is_player_inside = false
 
 func _process(_delta:float) -> void:
-    if is_player_inside:
-        check_if_centered(player)
+    if not is_player_inside or not is_centered(player): return        
+    if Globals.enemies_container.get_child_count() == 0:
+        Globals.complete_level()
 

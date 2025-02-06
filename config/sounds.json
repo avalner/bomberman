@@ -62,5 +62,9 @@
 	"timer_last_tick": {
 		"file": "res://sounds/timer_last_tick.mp3",
 		"volume_db": -6
+	},
+	"all_killed": {
+		"file": "res://sounds/all_killed.wav",
+		"volume_db": -6
 	}
 }
