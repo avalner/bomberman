@@ -6,7 +6,7 @@ This is a remake of the classic Bomberman game developed using the Godot Engine.
 
 ## Key Files and Directories
 
-- **assets/**: Contains game assets such as images and sounds.
+- **assets/**: Contains game assets such as images.
 - **scenes/**: Contains the game scenes.
 - **scripts/**: Contains the game scripts.
 - **sounds/**: Contains audio files.
