@@ -1,4 +1,4 @@
--# Bomberman Game
+# Bomberman Game
 
 This is a remake of the classic Bomberman game developed using the Godot Engine. The game features various player states, animations, sounds, and power-ups.
 
