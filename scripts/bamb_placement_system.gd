@@ -23,6 +23,9 @@ func place_bomb() -> void:
 			if is_instance_valid(bomb) and bomb.position == bombPosition:
 				return
 		
+		if is_brick_wall_at_bomb_placement_position(bombPosition):
+			return
+		
 		var bomb: Bomb = BOMB_SCENE.instantiate()
 		bomb.position = bombPosition
 		bomb.explosion_size = Globals.explosion_size
@@ -30,6 +33,15 @@ func place_bomb() -> void:
 		bomb.explosions_container = explosions_container
 		player.collision_mask &= ~Utils.COLLISTION_MASK.BOMB
 		bombs_container.add_child(bomb)
+
+func is_brick_wall_at_bomb_placement_position(bombPosition: Vector2) -> bool:
+	var overlapping_bodies: Array[Node2D] = player.area_2d.get_overlapping_bodies()
+
+	for body in overlapping_bodies:
+		if body is BrickWall and body.position == bombPosition:
+			return true
+
+	return false
 
 func detonate_bombs() -> void:
 	for bomb in bombs_container.get_children():

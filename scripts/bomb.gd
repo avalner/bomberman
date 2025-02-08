@@ -30,7 +30,7 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 		if unexited_bombs > 0:
 			unexited_bombs -= 1
 		
-		if unexited_bombs == 0:
+		if unexited_bombs == 0 and not Globals.bomb_pass:
 			body.collision_mask |= Utils.COLLISTION_MASK.BOMB
 
 func detonate() -> void:

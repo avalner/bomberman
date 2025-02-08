@@ -269,8 +269,8 @@ explosions_container = NodePath("../Explosions")
 
 [node name="Hud" parent="." instance=ExtResource("4_jyhfs")]
 
-[node name="GameOver" parent="." instance=ExtResource("5_tbgi4")]
+[node name="LevelStart" parent="." instance=ExtResource("6_tefeu")]
 visible = false
 
-[node name="LevelStart" parent="." instance=ExtResource("6_tefeu")]
+[node name="GameOver" parent="." instance=ExtResource("5_tbgi4")]
 visible = false

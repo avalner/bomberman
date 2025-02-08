@@ -37,6 +37,10 @@ window/vsync/vsync_mode=0
 
 project/assembly_name="BomberMan"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot-vim/plugin.cfg")
+
 [input]
 
 right={

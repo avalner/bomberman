@@ -13,6 +13,7 @@ class_name Player
 		explosions_container = value
 		update_configuration_warnings()
 
+@onready var area_2d: Area2D = $Area2D
 @onready var bomb_placement_system: BombPlacementSystem = $BombPlacementSystem
 @onready var player_animations: AnimatedSprite2D = $PlayerAnimations
 
@@ -34,6 +35,13 @@ var state := PlayerState.IDLE
 
 func _ready() -> void:
 	motion_mode = MotionMode.MOTION_MODE_FLOATING
+	
+	if Globals.wall_pass:
+		collision_mask &= ~Utils.COLLISTION_MASK.BRICK_WALLS
+	
+	if Globals.bomb_pass:
+		collision_mask &= ~Utils.COLLISTION_MASK.BOMB
+
 	Globals.wall_pass_changed.connect(_on_wall_pass_changed)
 	Globals.bomb_pass_changed.connect(_on_bomb_pass_changed)
 

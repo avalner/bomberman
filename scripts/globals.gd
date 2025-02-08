@@ -88,13 +88,13 @@ var explosion_size: int = 1:
 		explosion_size = value
 		explosion_size_changed.emit(explosion_size)
 
-var auto_detonate: bool = true:
+var auto_detonate: bool = false:
 	set(value):
 		if value == auto_detonate: return
 		auto_detonate = value
 		auto_detonate_changed.emit(auto_detonate)
 
-var wall_pass: bool = false:
+var wall_pass: bool = true:
 	set(value):
 		if value == wall_pass: return
 		wall_pass = value
