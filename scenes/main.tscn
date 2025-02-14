@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://bpylit2vi7ewk"]
+[gd_scene load_steps=10 format=4 uid="uid://bpylit2vi7ewk"]
 
 [ext_resource type="Script" uid="uid://lsfhptn17nqx" path="res://scripts/main.gd" id="1_b2b57"]
 [ext_resource type="Texture2D" uid="uid://bv3od7dxw6lut" path="res://assets/Sprites.png" id="1_puhri"]
@@ -6,6 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://cqjc62a5su4ei" path="res://scenes/hud.tscn" id="4_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://dd30q6pl2mil3" path="res://scenes/game_over.tscn" id="5_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://cb8hn6t0rn3ra" path="res://scenes/level_start.tscn" id="6_tefeu"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_tefeu"]
+friction = 0.0
+absorbent = true
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lnvhd"]
 texture = ExtResource("1_puhri")
@@ -239,6 +243,7 @@ texture = ExtResource("1_puhri")
 [sub_resource type="TileSet" id="TileSet_gfx4h"]
 physics_layer_0/collision_layer = 6
 physics_layer_0/collision_mask = 9
+physics_layer_0/physics_material = SubResource("PhysicsMaterial_tefeu")
 sources/0 = SubResource("TileSetAtlasSource_lnvhd")
 
 [node name="main" type="Node"]
@@ -259,7 +264,7 @@ tile_set = SubResource("TileSet_gfx4h")
 
 [node name="Player" parent="Root" node_paths=PackedStringArray("bombs_container", "explosions_container") instance=ExtResource("2_mm0hx")]
 unique_name_in_owner = true
-position = Vector2(24, 24)
+position = Vector2(23.9909, 23.9909)
 bombs_container = NodePath("../Bombs")
 explosions_container = NodePath("../Explosions")
 

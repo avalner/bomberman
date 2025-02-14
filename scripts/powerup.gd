@@ -52,10 +52,10 @@ func animate(delta: float) -> void:
 			increasing = true
 
 func _on_body_entered(body: Node2D) -> void:
-	if body.has_method("apply_powerup"):
+	if body.has_method("apply_powerup") and !Utils.has_brickwall_at_position(global_position):
 		SoundsPlayer.play_sound("powerup")
 		body.apply_powerup(powerup_type)
-	queue_free()
+		queue_free()
 
 func destroy(_source: Node) -> void:
 	queue_free()

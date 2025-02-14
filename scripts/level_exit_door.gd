@@ -28,7 +28,7 @@ func _on_body_exited(body:Node2D) -> void:
         is_player_inside = false
 
 func _process(_delta:float) -> void:
-    if not is_player_inside or not is_centered(player): return        
-    if Globals.enemies_container.get_child_count() == 0:
+    if not is_player_inside or not is_centered(player) or Utils.has_brickwall_at_position(global_position): return        
+    if Globals.enemy_count == 0:
         Globals.complete_level()
 

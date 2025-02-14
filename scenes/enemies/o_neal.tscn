@@ -97,7 +97,7 @@ animations = [{
 size = Vector2(12, 12)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cbgv3"]
-size = Vector2(12, 12)
+size = Vector2(6, 6)
 
 [node name="ONeal" type="CharacterBody2D" groups=["Enemies"]]
 collision_layer = 8

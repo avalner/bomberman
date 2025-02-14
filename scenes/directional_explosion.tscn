@@ -343,7 +343,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c6fkk"]
-size = Vector2(8, 8)
+size = Vector2(2.5, 2.5)
 
 [node name="DirectionalExplosion" type="Area2D"]
 collision_layer = 0

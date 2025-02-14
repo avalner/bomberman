@@ -30,7 +30,7 @@ window/size/viewport_width=496
 window/size/viewport_height=232
 window/size/window_width_override=1488
 window/size/window_height_override=696
-window/stretch/mode="canvas_items"
+window/stretch/mode="viewport"
 window/vsync/vsync_mode=0
 
 [dotnet]
@@ -97,5 +97,5 @@ pause={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
-environment/defaults/default_clear_color=Color(0.25098, 0.529412, 0, 1)
+environment/defaults/default_clear_color=Color(0.0470588, 0.282353, 0, 1)
 2d/snap/snap_2d_transforms_to_pixel=true

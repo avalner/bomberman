@@ -113,6 +113,10 @@ func _on_state_changed(new_state: State, _old_state: State) -> void:
 	match new_state:
 		State.DEAD:
 			velocity = Vector2.ZERO
+			collision_layer = 0
+			collision_mask = 0
+			area_2d.collision_layer = 0
+			area_2d.collision_mask = 0
 			Globals.enemy_killed.emit(enemy_type)
 		State.MOVING:
 			animated_sprite.play("default")
@@ -125,7 +129,7 @@ func _on_state_changed(new_state: State, _old_state: State) -> void:
 			
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body is Player and state != State.DEAD:
+	if body is Player:
 		body.destroy(self)
 
 

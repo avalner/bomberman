@@ -93,7 +93,7 @@ animations = [{
 size = Vector2(11, 12)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cbgv3"]
-size = Vector2(11, 12)
+size = Vector2(6, 6)
 
 [node name="Valcom" type="CharacterBody2D" groups=["Enemies"]]
 collision_layer = 8
@@ -114,5 +114,5 @@ shape = SubResource("RectangleShape2D_ncqr7")
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-0.5, 0)
+position = Vector2(0, -0.25)
 shape = SubResource("RectangleShape2D_cbgv3")

@@ -16,6 +16,7 @@ class_name Player
 @onready var area_2d: Area2D = $Area2D
 @onready var bomb_placement_system: BombPlacementSystem = $BombPlacementSystem
 @onready var player_animations: AnimatedSprite2D = $PlayerAnimations
+@onready var collistionShape2D: CollisionShape2D = $CollisionShape
 
 enum PlayerState {
 	IDLE,
@@ -35,6 +36,10 @@ var state := PlayerState.IDLE
 
 func _ready() -> void:
 	motion_mode = MotionMode.MOTION_MODE_FLOATING
+	var physics_material: PhysicsMaterial = PhysicsMaterial.new()
+	physics_material.friction = 0.0
+	physics_material.bounce = 0.0
+	collistionShape2D.shape.set("physics_material_override", physics_material)
 	
 	if Globals.wall_pass:
 		collision_mask &= ~Utils.COLLISTION_MASK.BRICK_WALLS
@@ -100,7 +105,7 @@ func destroy(source: Node) -> void:
 	if state == PlayerState.DEAD:
 		return
 
-	if (source is CentralExplosion or source is DirectionalExplosion) and Globals.immune_to_explosions:
+	if (source is CentralExplosion or source is DirectionalExplosion or source is BrickWall) and Globals.immune_to_explosions:
 		return
 
 	if source is Enemy and Globals.invincible:
@@ -116,7 +121,7 @@ func _on_wall_pass_changed(wall_pass: bool) -> void:
 
 func _on_bomb_pass_changed(bomb_pass: bool) -> void:
 	if bomb_pass:
-		collision_mask &= ~Utils.COLLISTION_MASK.BOMB 
+		collision_mask &= ~Utils.COLLISTION_MASK.BOMB
 	else:
 		collision_mask |= Utils.COLLISTION_MASK.BOMB
 

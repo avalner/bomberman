@@ -49,7 +49,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q7gd8"]
-size = Vector2(12, 12)
+size = Vector2(2.5, 2.5)
 
 [node name="CentralExplosion" type="Area2D"]
 collision_layer = 0
@@ -63,7 +63,6 @@ metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_q7gd8")
-metadata/_edit_lock_ = true
 
 [node name="Raycasts" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
