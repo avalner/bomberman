@@ -16,7 +16,9 @@ var auto_detonate := true
 
 func _ready() -> void:
 	unexited_bombs += 1
+	Globals.set_astar_point_disabled(position)
 	SoundsPlayer.play_sound("place_bomb")
+	print("Bomb placed at: ", global_position)
 
 	if auto_detonate:
 		timer.start()
@@ -34,6 +36,7 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 			body.collision_mask |= Utils.COLLISTION_MASK.BOMB
 
 func detonate() -> void:
+	Globals.set_astar_point_enabled(position)
 	SoundsPlayer.play_sound("explosion")
 	var explosion: CentralExplosion = EXPLOSION_SCENE.instantiate()
 	explosion.explosion_size = explosion_size

@@ -62,7 +62,7 @@ one_shot = true
 
 [node name="Area2D" type="Area2D" parent="."]
 editor_description = "This area is used to detect if the player is still standing on it. If it isn't then bombs collision shape is enabled."
-collision_layer = 0
+collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 scale = Vector2(0.41, 0.41)

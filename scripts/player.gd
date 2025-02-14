@@ -1,4 +1,3 @@
-@tool
 extends CharacterBody2D
 
 class_name Player
@@ -129,14 +128,3 @@ func _on_player_animations_animation_finished() -> void:
 	if state == PlayerState.DYING:
 		queue_free()
 		changeState(PlayerState.DEAD)
-		
-func _get_configuration_warnings() -> PackedStringArray:
-	var warnings: PackedStringArray = PackedStringArray()
-	
-	if !bombs_container:
-		warnings.append("bombs_container is mandatory")
-	
-	if !explosions_container:
-		warnings.append("explosions_container is mandatory")
-	
-	return warnings

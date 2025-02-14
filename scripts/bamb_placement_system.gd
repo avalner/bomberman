@@ -15,8 +15,7 @@ func _ready() -> void:
 
 func place_bomb() -> void:
 	if bombs_container.get_child_count() < Globals.max_bomb_count:
-		var bombPosition: Vector2 = (player.position / Globals.TILE_SIZE).floor() * Globals.TILE_SIZE \
-			 + Vector2(Globals.TILE_SIZE / 2.0, Globals.TILE_SIZE / 2.0)
+		var bombPosition: Vector2 = Utils.position_to_tile_center(player.position)
 		
 		# Check if there is already a bomb in the same position
 		for bomb in bombs_container.get_children():

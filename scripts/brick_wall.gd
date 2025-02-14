@@ -7,6 +7,7 @@ class_name BrickWall
 func destroy() -> void:
     collision_layer = 0
     animated_sprite_2d.play("destroy")
+    Globals.set_astar_point_enabled(position)
     
     if Utils.has_player_at_position(global_position):
          Globals.player.destroy(self)
