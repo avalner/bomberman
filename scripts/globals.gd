@@ -87,13 +87,13 @@ var explosion_size: int = 1:
 		explosion_size = value
 		explosion_size_changed.emit(explosion_size)
 
-var auto_detonate: bool = false:
+var auto_detonate: bool = true:
 	set(value):
 		if value == auto_detonate: return
 		auto_detonate = value
 		auto_detonate_changed.emit(auto_detonate)
 
-var wall_pass: bool = true:
+var wall_pass: bool = false:
 	set(value):
 		if value == wall_pass: return
 		wall_pass = value
@@ -111,7 +111,7 @@ var bomb_pass: bool = false:
 		bomb_pass = value
 		bomb_pass_changed.emit(bomb_pass)
 
-var invincible: bool = true:
+var invincible: bool = false:
 	set(value):
 		if value == invincible: return
 		invincible = value

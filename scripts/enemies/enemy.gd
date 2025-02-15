@@ -131,16 +131,17 @@ func get_available_directions() -> Array[Vector2]:
 
 func destroy(_source: Node) -> void:
 	change_state(State.DEAD)
-	animated_sprite.play("death")
 
 func _on_state_changed(new_state: State, _old_state: State) -> void:
 	match new_state:
 		State.DEAD:
+			animated_sprite.play("death")
 			velocity = Vector2.ZERO
 			collision_layer = 0
 			collision_mask = 0
 			area_2d.collision_layer = 0
 			area_2d.collision_mask = 0
+			thinking_timer.stop()
 			Globals.enemy_killed.emit(enemy_type)
 		State.MOVING:
 			animated_sprite.play("default")
