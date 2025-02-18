@@ -2,7 +2,7 @@
 
 This is a remake of the classic Bomberman game developed using the Godot Engine. The game features various player states, animations, sounds, and power-ups.
 
-![image](https://github.com/user-attachments/assets/1e476ccf-818b-4c21-91d6-a9ab70599b94)
+![image](https://github.com/user-attachments/assets/0af74de1-ba0d-4360-80a3-efc6c050e979)
 
 ## Key Files and Directories
 
