@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=4 uid="uid://bpylit2vi7ewk"]
+[gd_scene load_steps=11 format=4 uid="uid://bpylit2vi7ewk"]
 
-[ext_resource type="Script" uid="uid://lsfhptn17nqx" path="res://scripts/main.gd" id="1_b2b57"]
+[ext_resource type="Script" uid="uid://c342pn07wt2p2" path="res://scripts/MainScene.cs" id="1_o6xl0"]
 [ext_resource type="Texture2D" uid="uid://bv3od7dxw6lut" path="res://assets/Sprites.png" id="1_puhri"]
 [ext_resource type="PackedScene" uid="uid://bov22kqd0a674" path="res://scenes/player.tscn" id="2_mm0hx"]
 [ext_resource type="PackedScene" uid="uid://cqjc62a5su4ei" path="res://scenes/hud.tscn" id="4_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://dd30q6pl2mil3" path="res://scenes/game_over.tscn" id="5_tbgi4"]
+[ext_resource type="Script" uid="uid://da5pt6ykuhooe" path="res://scripts/LevelStart.cs" id="6_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://cb8hn6t0rn3ra" path="res://scenes/level_start.tscn" id="6_tefeu"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_tefeu"]
@@ -248,8 +249,8 @@ custom_data_layer_0/name = "passable"
 custom_data_layer_0/type = 1
 sources/0 = SubResource("TileSetAtlasSource_lnvhd")
 
-[node name="main" type="Node2D"]
-script = ExtResource("1_b2b57")
+[node name="MainScene" type="Node2D"]
+script = ExtResource("1_o6xl0")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 position = Vector2(0, 24)
@@ -265,10 +266,10 @@ position = Vector2(24, 48)
 
 [node name="Explosions" type="Node2D" parent="Root"]
 
-[node name="Player" parent="Root" node_paths=PackedStringArray("bombs_container", "explosions_container") instance=ExtResource("2_mm0hx")]
+[node name="Player" parent="Root" node_paths=PackedStringArray("BombsContainer", "ExplosionsContainer") instance=ExtResource("2_mm0hx")]
 unique_name_in_owner = true
-bombs_container = NodePath("../Bombs")
-explosions_container = NodePath("../Explosions")
+BombsContainer = NodePath("../Bombs")
+ExplosionsContainer = NodePath("../Explosions")
 
 [node name="Enemies" type="Node2D" parent="Root"]
 
@@ -286,6 +287,7 @@ offset_bottom = 24.0
 visible = false
 offset_right = 496.0
 offset_bottom = 232.0
+script = ExtResource("6_o6xl0")
 
 [node name="GameOver" parent="." instance=ExtResource("5_tbgi4")]
 visible = false

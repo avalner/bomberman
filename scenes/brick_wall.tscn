@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://bwbkis0noreo4"]
 
 [ext_resource type="Texture2D" uid="uid://bv3od7dxw6lut" path="res://assets/Sprites.png" id="1_7iu4m"]
-[ext_resource type="Script" uid="uid://b4ssd7jv3kdh2" path="res://scripts/brick_wall.gd" id="1_y8get"]
+[ext_resource type="Script" uid="uid://bjye1axueo1j3" path="res://scripts/BrickWall.cs" id="1_is8a7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uh4ru"]
 atlas = ExtResource("1_7iu4m")
@@ -71,12 +71,10 @@ size = Vector2(16, 16)
 [node name="BrickWall" type="StaticBody2D"]
 collision_layer = 4
 collision_mask = 25
-script = ExtResource("1_y8get")
+script = ExtResource("1_is8a7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_l1hrr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_is8a7")
-
-[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

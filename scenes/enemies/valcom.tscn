@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://btkv65qao24kc"]
 
-[ext_resource type="Script" uid="uid://dl53f3juf5o2p" path="res://scripts/enemies/valcom.gd" id="1_cbgv3"]
 [ext_resource type="Texture2D" uid="uid://bv3od7dxw6lut" path="res://assets/Sprites.png" id="1_j354w"]
+[ext_resource type="Script" uid="uid://bbba6ktijcchh" path="res://scripts/enemies/Valcom.cs" id="1_uvngv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cbgv3"]
 atlas = ExtResource("1_j354w")
@@ -99,7 +99,7 @@ size = Vector2(6, 6)
 collision_layer = 8
 collision_mask = 0
 motion_mode = 1
-script = ExtResource("1_cbgv3")
+script = ExtResource("1_uvngv")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 5

@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://mjlo4wx6t6v8"]
 
-[ext_resource type="Script" uid="uid://c3k3ijlxowuhd" path="res://scripts/bomb.gd" id="1_gfh3y"]
 [ext_resource type="Texture2D" uid="uid://bv3od7dxw6lut" path="res://assets/Sprites.png" id="1_rbyeu"]
+[ext_resource type="Script" uid="uid://bcfavd137qi76" path="res://scripts/Bomb.cs" id="1_vpdcx"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m44jv"]
 atlas = ExtResource("1_rbyeu")
@@ -44,7 +44,7 @@ radius = 18.1818
 [node name="Bomb" type="StaticBody2D"]
 collision_layer = 16
 collision_mask = 0
-script = ExtResource("1_gfh3y")
+script = ExtResource("1_vpdcx")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_goiun")
@@ -69,5 +69,5 @@ scale = Vector2(0.41, 0.41)
 shape = SubResource("CircleShape2D_uxw8n")
 one_way_collision_margin = 0.0
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="OnTimerTimeout"]
+[connection signal="body_exited" from="Area2D" to="." method="OnArea2DBodyExited"]

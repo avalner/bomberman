@@ -1,0 +1,4 @@
+[*.cs]
+
+# GD0201: The name of the delegate must end with 'EventHandler'
+dotnet_diagnostic.GD0201.severity = none

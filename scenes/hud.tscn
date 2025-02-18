@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cqjc62a5su4ei"]
 
 [ext_resource type="FontFile" uid="uid://b05wi0nkx1rym" path="res://fonts/PressStart2P-Regular.ttf" id="1_ahhtf"]
-[ext_resource type="Script" uid="uid://bybqkke5jgh1s" path="res://scripts/hud.gd" id="1_oo0fn"]
+[ext_resource type="Script" uid="uid://c0ahfmiq5767w" path="res://scripts/Hud.cs" id="1_oo0fn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oo0fn"]
 content_margin_left = 10.0

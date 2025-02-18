@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://bbn7vk0vv3yjo"]
 
-[ext_resource type="Script" uid="uid://bejiw6ddtcavf" path="res://scripts/central_explosion.gd" id="1_i25ws"]
+[ext_resource type="Script" uid="uid://b31eu4oh6ggst" path="res://scripts/CentralExplosion.cs" id="1_eg57w"]
 [ext_resource type="Texture2D" uid="uid://bv3od7dxw6lut" path="res://assets/Sprites.png" id="1_tbyam"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e235a"]
@@ -53,12 +53,14 @@ size = Vector2(2.5, 2.5)
 
 [node name="CentralExplosion" type="Area2D"]
 collision_layer = 0
-script = ExtResource("1_i25ws")
+script = ExtResource("1_eg57w")
 metadata/_edit_lock_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_00c2e")
-frame_progress = 0.551677
+autoplay = "default"
+frame = 6
+frame_progress = 1.0
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -90,7 +92,3 @@ position = Vector2(-7, 0)
 target_position = Vector2(0, 0)
 collision_mask = 6
 metadata/_edit_lock_ = true
-
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
-[connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]

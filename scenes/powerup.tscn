@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://drknygpb6tdkw"]
 
-[ext_resource type="Script" uid="uid://bcrgh3al44h7n" path="res://scripts/powerup.gd" id="1_ih772"]
+[ext_resource type="Script" uid="uid://hijtiqsdmdiv" path="res://scripts/Powerup.cs" id="1_ih772"]
 [ext_resource type="Texture2D" uid="uid://bv3od7dxw6lut" path="res://assets/Sprites.png" id="2_406cw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pufsy"]
@@ -61,4 +61,4 @@ region_rect = Rect2(112, 224, 15, 15)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_pufsy")
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]
