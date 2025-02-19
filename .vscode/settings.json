@@ -1,0 +1,16 @@
+{
+  "mono-debug.exceptionOptions": {
+    "System.Exception": "unhandled",
+    "System.SystemException": "never",
+    "System.ArithmeticException": "unhandled",
+    "System.ArrayTypeMismatchException": "unhandled",
+    "System.DivideByZeroException": "unhandled",
+    "System.IndexOutOfRangeException": "unhandled",
+    "System.InvalidCastException": "unhandled",
+    "System.NullReferenceException": "unhandled",
+    "System.OutOfMemoryException": "always",
+    "System.OverflowException": "always",
+    "System.StackOverflowException": "always",
+    "System.TypeInitializationException": "unhandled"
+  }
+}
