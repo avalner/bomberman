@@ -18,7 +18,6 @@ config/icon="res://Bomberman-icon.png"
 [autoload]
 
 Globals="*res://scripts/Globals.cs"
-SoundsPlayer="*res://scripts/sound_player.gd"
 
 [display]
 
