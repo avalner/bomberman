@@ -114,6 +114,7 @@ public partial class Enemy : CharacterBody2D
         }
         else
         {
+            
             if (Utils.IsTileCenter(Position) || Velocity == Vector2.Zero)
             {
                 StopAndThink();

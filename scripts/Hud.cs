@@ -9,6 +9,14 @@ public partial class Hud : PanelContainer
     private Label _scoreLabel;
     private Label _livesLabel;
 
+    public override void _EnterTree()
+    {
+        base._EnterTree();
+        Globals.Instance.LevelTimeChanged += OnLevelTimeChanged;
+        Globals.Instance.PlayerLivesChanged += UpdateLives;
+        Globals.Instance.ScoreChanged += UpdateScore;
+    }
+
     public override void _Ready()
     {
         _timeLabel = GetNode<Label>("HBoxContainer/TimeLabel");
@@ -18,10 +26,11 @@ public partial class Hud : PanelContainer
         UpdateTime(Globals.Instance.RemainingTime, true);
         UpdateLives(Globals.Instance.Lives);
         UpdateScore(Globals.Instance.Score);
+    }
 
-        Globals.Instance.LevelTimeChanged += OnLevelTimeChanged;
-        Globals.Instance.PlayerLivesChanged += UpdateLives;
-        Globals.Instance.ScoreChanged += UpdateScore;
+    public override void _Draw()
+    {
+        base._Draw();
     }
 
     public override void _ExitTree()

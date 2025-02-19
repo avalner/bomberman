@@ -38,8 +38,17 @@ public partial class CentralExplosion : Area2D
             {
                 var collider = raycast.GetCollider();
                 var collisionPoint = ToLocal(raycast.GetCollisionPoint());
+                
+                if (collisionPoint.X  != 0) {
+                    collisionPoint.X += collisionPoint.X < 0 ? 1 : -1;
+                }
+
+                if (collisionPoint.Y != 0) {
+                    collisionPoint.Y += collisionPoint.Y < 0 ? 1 : -1;
+                }
+
                 var tileCoords = Utils.PositionToTileCenter(collisionPoint);
-                int colliderDistance = (int)Mathf.Max(Mathf.Abs(tileCoords.X >= 0 ? tileCoords.X : tileCoords.X + 1), Mathf.Abs(tileCoords.Y >= 0 ? tileCoords.Y : tileCoords.Y + 1));
+                int colliderDistance = (int)(Mathf.Max(Mathf.Abs(tileCoords.X), Mathf.Abs(tileCoords.Y)) / Globals.TILE_SIZE);
 
                 flameSize = Math.Min(flameSize, colliderDistance);
 
@@ -52,7 +61,7 @@ public partial class CentralExplosion : Area2D
             _flameSizes.Add(flameSize);
         }
 
-        GD.Print("Flame sizes: ", _flameSizes);
+        GD.Print("Flame sizes: ", string.Join(", ", _flameSizes));
     }
 
     private void ConfigureRaycasts()

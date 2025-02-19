@@ -119,7 +119,10 @@ public static class Utils
 
     public static bool IsTileCenter(Vector2 position)
     {
-        return (new Vector2I((int)Math.Round(position.X), (int)Math.Round(position.Y)) % Globals.TILE_SIZE) == Vector2I.Zero;
+        int gridX = (int)Math.Round(position.X / Globals.TILE_SIZE) * Globals.TILE_SIZE;
+        int gridY = (int)Math.Round(position.Y / Globals.TILE_SIZE) * Globals.TILE_SIZE;
+
+        return Math.Abs(position.X - gridX) < 0.1f && Math.Abs(position.Y - gridY) < 0.1f;
     }
 
     public static Vector2I PositionToCellPosition(Vector2 position)

@@ -117,7 +117,7 @@ public partial class Globals : Node2D
         }
     }
 
-    private int _explosionSize = 1;
+    private int _explosionSize = 3;
     public int ExplosionSize
     {
         get => _explosionSize;
@@ -337,7 +337,7 @@ public partial class Globals : Node2D
             case GameState.LEVEL_COMPLETE:
                 Lives += 1;
                 Stage += 1;
-                Player.QueueFree();
+                Player.Remove();
                 SoundsPlayer.PlaySound("level_finished");
                 await ToSignal(GetTree().CreateTimer(3), "timeout");
                 GetTree().ReloadCurrentScene();

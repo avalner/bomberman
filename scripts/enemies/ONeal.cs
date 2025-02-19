@@ -23,7 +23,10 @@ public partial class ONeal : Enemy
                     }
                     else
                     {
-                        _direction = availableDirections[(int)(GD.Randi() % availableDirections.Count)];
+                        var direction = availableDirections[(int)(GD.Randi() % availableDirections.Count)];
+                        var nextPosition = Utils.PositionToTileCenter(Position + direction * Globals.TILE_SIZE);
+
+                        _direction = (nextPosition - Position).Normalized();
                         Velocity = _direction * Speed;
                     }
                 }
