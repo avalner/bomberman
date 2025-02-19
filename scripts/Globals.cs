@@ -117,7 +117,7 @@ public partial class Globals : Node2D
         }
     }
 
-    private int _explosionSize = 3;
+    private int _explosionSize = 1;
     public int ExplosionSize
     {
         get => _explosionSize;
