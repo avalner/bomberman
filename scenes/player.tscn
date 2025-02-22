@@ -230,6 +230,7 @@ script = ExtResource("1_qlg0r")
 [node name="PlayerAnimations" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_hiyq4")
 animation = &"idle_down"
+autoplay = "idle_down"
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_qlg0r")
